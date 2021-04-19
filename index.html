@@ -13,10 +13,19 @@
         <strong>BuzzQuizz</strong>
     </div>
 
-    <div class="create-quizz">
+    <div class="create-quizz hidden">
         <p>Você não criou nenhum quizz ainda :(</p>
-        <button type="submit">Criar Quizz</button>
+        <button type="submit" onclick="createQuizz()">Criar Quizz</button>
     </div>
+
+    <div class="create-screens">
+        <strong>Comece pelo começo</strong>
+        <div class="forms-container">
+            <input type="text" placeholder="Título do seu quizz"><input type="url" placeholder="URL da imagem do seu quizz"><input type="number" min="1" placeholder="Quantidade de perguntas do quizz"><input type="number" min="1" placeholder="Quantidade de níveis do quizz">
+        </div>
+        <button type="submit" class="create-quizz-buttons">Prosseguir pra criar perguntas</button>
+    </div>
+
     <script src="assets/scripts.js"></script>
 </body>
 </html>
