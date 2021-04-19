@@ -47,6 +47,10 @@ table {
 	border-spacing: 0;
 }
 
+strong {
+	font-weight: 700;
+}
+
 * {
     box-sizing: border-box;
 }
