@@ -14,8 +14,15 @@ function toggleHidden(element){
     element.classList.toggle("hidden");
 }
 
-function notNull(element){
-    return element.text !== null
+function notNullObject(element){
+
+    let result = 1;
+    const keys = Object.keys(element);
+    for(let i = 0; i<keys.length; i++){
+        result *= element[keys[i]].length;
+    }
+
+    return !!result;
 }
 
 function createQuizzStart(){
@@ -38,11 +45,12 @@ function createQuizz(){
         alert("Por favor, insira uma imagem para seu quizz :)");
         erro++;
     }
-    if(numberQuestions < 3){
+    if(numberQuestions < 3 || !!numberQuestions === !!NaN){
         alert("Por favor, insira um número de perguntas maior que 2");
         erro++;
     }
-    if(numberLevels < 2){
+
+    if(numberLevels < 2 || !!numberLevels === !!NaN){
         alert("Por favor, insira um número de níveis maior que 1");
         erro++;
     }
@@ -156,8 +164,8 @@ function goHome(element){
 //     const createdQuizz = {
 //         title: title,
 //         image: imgUrl,
-//         questions: questions,
-//         levels: levels
+//         questions: questions.filter(notNullObject),
+//         levels: levels.filter(notNullObject)
 //     }
 
 //     console.log(createdQuizz);
@@ -168,10 +176,10 @@ function goHome(element){
 //     sendQuizz.catch(sendError);
 // }
 
-// function sendSucess(){
-//     alert("Seu quizz foi enviado com sucesso!");
-// }
+function sendSucess(){
+    alert("Seu quizz foi enviado com sucesso!");
+}
 
-// function sendError(){
-//     alert("Houve um problema na criação do seu quizz :(");
-// }
+function sendError(){
+    alert("Houve um problema na criação do seu quizz :(");
+}
