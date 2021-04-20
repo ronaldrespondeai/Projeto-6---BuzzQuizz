@@ -39,7 +39,7 @@ function validURL(str) {
   }
 
 function validColor(str) {
-    var pattern = new RegExp('#+.{6,}');
+    var pattern = new RegExp('#+.{6}');
     return !!pattern.test(str);
 }
 
@@ -59,7 +59,7 @@ function createQuizz(){
         alert("Título inválido, precisa possuir entre 20 e 65 caracteres");
         erro++;
     }
-    if(imgUrl === ""){
+    if(!validURL(imgUrl)){
         alert("Por favor, insira uma imagem para seu quizz :)");
         erro++;
     }
