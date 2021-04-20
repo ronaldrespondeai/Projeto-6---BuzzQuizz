@@ -18,12 +18,35 @@
         <button type="submit" onclick="createQuizz()">Criar Quizz</button>
     </div>
 
-    <div class="create-screens">
+    <div class="create-screens screen-31 hidden">
         <strong>Comece pelo começo</strong>
         <div class="forms-container">
-            <input type="text" placeholder="Título do seu quizz"><input type="url" placeholder="URL da imagem do seu quizz"><input type="number" min="1" placeholder="Quantidade de perguntas do quizz"><input type="number" min="1" placeholder="Quantidade de níveis do quizz">
+            <input type="text" placeholder="Título do seu quizz">
+            <input type="url" placeholder="URL da imagem do seu quizz">
+            <input type="number" min="1" placeholder="Quantidade de perguntas do quizz">
+            <input type="number" min="1" placeholder="Quantidade de níveis do quizz">
         </div>
         <button type="submit" class="create-quizz-buttons">Prosseguir pra criar perguntas</button>
+    </div>
+
+    <div class="create-screens screen-32">
+        <strong>Crie suas perguntas</strong>
+        <div class="forms-container">
+            <strong>Pergunta 1</strong>
+            <input type="text" placeholder="Texto da pergunta">
+            <input type="text" placeholder="Cor de fundo da pergunta">
+            <strong>Resposta correta</strong>
+            <input type="text" placeholder="Resposta correta">
+            <input type="url" placeholder="URL da imagem">
+            <strong>Respostas incorretas</strong>
+            <input type="text" placeholder="Resposta incorreta 1">
+            <input type="url" placeholder="URL da imagem 1">
+            <input type="text" placeholder="Resposta incorreta 2">
+            <input type="url" placeholder="URL da imagem 2">
+            <input type="text" placeholder="Resposta incorreta 3">
+            <input type="url" placeholder="URL da imagem 3">
+        </div>
+        <button type="submit" class="create-quizz-buttons">Prosseguir pra criar níveis</button>
     </div>
 
     <script src="assets/scripts.js"></script>
