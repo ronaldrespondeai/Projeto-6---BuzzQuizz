@@ -234,8 +234,8 @@ function sendError(){
 RequireQuizzes();
 
 function RequireQuizzes() {
-    const promessa = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes');
-    promessa.then(LoadQuizzes);
+    const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes');
+    promise.then(LoadQuizzes);
 }
 
 function LoadQuizzes(post) {
@@ -243,12 +243,28 @@ function LoadQuizzes(post) {
     quizzes.innerHTML = '';
     post.data.forEach(element => {
         quizzes.innerHTML += `
-        <li class="quizz">
+        <li class="quizz" onclick="RequireQuizz(${element.id})">
             <img src="${element.image}" alt="">
             <div class="gradient"></div>
             <p>${element.title}</p>
         </li>
         `;
     });
+}
+
+function RequireQuizz(id) {
+    const promise = axios.get(`
+    https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes/${id}
+    `);
+    promise.then(LoadQuizz);
+}
+
+function LoadQuizz(post) {
+    const home = document.querySelector('.home');
+    const quizzPage = document.querySelector('.quizz-page');
+    const quizz = post.data;
+    home.classList.add('hidden');
+    quizzPage.classList.remove('hidden');
+
 }
 // Quizz Loading
