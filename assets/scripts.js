@@ -19,10 +19,28 @@ function notNullObject(element){
     let result = 1;
     const keys = Object.keys(element);
     for(let i = 0; i<keys.length; i++){
-        result *= element[keys[i]].length;
+        if(element[keys[i]] === false){
+        }else{
+            result *= element[keys[i]].length;
+        }
     }
 
     return !!result;
+}
+
+function validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+  }
+
+function validColor(str) {
+    var pattern = new RegExp('#+.{6,}');
+    return !!pattern.test(str);
 }
 
 function createQuizzStart(){
@@ -45,7 +63,8 @@ function createQuizz(){
         alert("Por favor, insira uma imagem para seu quizz :)");
         erro++;
     }
-    if(numberQuestions < 3 || !!numberQuestions === !!NaN){
+    // voltar para menor que 4 aqui !! 
+    if(numberQuestions < 0 || !!numberQuestions === !!NaN){
         alert("Por favor, insira um número de perguntas maior que 2");
         erro++;
     }
@@ -89,36 +108,60 @@ function createQuestionsScreen(numberQuestions){
 function createQuestions(){
     const questionsAll = questionsContainer.querySelectorAll(".forms-container");
     questions = [];
+    let erros = 0;
 
     for(let i = 0; i<questionsAll.length; i++){
+
+        const title = questionsAll[i].querySelector(".create-quizz-question").value;
+        const color = questionsAll[i].querySelector(".create-quizz-background").value
+
+        if( title.length < 20 || !validColor(color)){
+            alert(`Por favor, insira um texto maior e/ou uma cor válida na pergunta ${i+1}!`);
+            erros++;
+        }
+
         let answersArray = [];
 
+        const correctAnswer = questionsAll[i].querySelector(".create-quizz-answer").value;
+        const correctImg = questionsAll[i].querySelector(".create-quizz-answerimg").value;
         const answersWrong = questionsAll[i].querySelectorAll(".create-quizz-wronganswer");
         const answersWrongImg = questionsAll[i].querySelectorAll(".create-quizz-wronganswerimg");
 
-        answersArray[0] = {
-            text: questionsAll[i].querySelector(".create-quizz-answer").value, 
-            image: questionsAll[i].querySelector(".create-quizz-answerimg").value, 
-            isCorrectAnswer: true};
+        if(correctAnswer === null || !validURL(correctImg)){
+            alert(`Por favor, insira uma resposta correta (texto e URL da imagem) na pergunta ${i+1}!`);
+            erros++;
+        }
         
         for(j = 0; j<answersWrong.length; j++){
-            if(answersWrong[j].value !== "" && answersWrongImg[j].value !== ""){
-                answersArray.push({
-                    text: answersWrong[j].value, 
-                    image: answersWrongImg[j].value, 
-                    isCorrectAnswer: false
-                })
-            }
+            answersArray.push({
+                text: answersWrong[j].value, 
+                image: answersWrongImg[j].value, 
+                isCorrectAnswer: false})
+        }
+
+        answersArray = answersArray.filter(notNullObject);
+        
+        answersArray.push({
+            text: correctAnswer, 
+            image: correctImg, 
+            isCorrectAnswer: true});
+
+        if(answersArray.length < 2){
+            alert(`Por favor, insira ao menos uma resposta errada (texto e URL da imagem) na pergunta ${i+1}!`);
+            erros++;
         }
 
         questions[i] = { 
-        title:questionsAll[i].querySelector(".create-quizz-question").value,  
-        color:questionsAll[i].querySelector(".create-quizz-background").value,
-        answers: answersArray
+        title: title,  
+        color: color,
+        answers: answersArray}
+
     }
+
+    if(erros === 0){
+        toggleHidden(screen32);
+        toggleHidden(screen33);
     }
-    toggleHidden(screen32);
-    toggleHidden(screen33);
 
 }
 
@@ -150,6 +193,8 @@ function createLevels(){
         })
     }
 
+    levels = levels.filter(notNullObject);
+
     toggleHidden(screen33);
     toggleHidden(screen34);
     sendCreatedQuizz();
@@ -164,8 +209,8 @@ function goHome(element){
 //     const createdQuizz = {
 //         title: title,
 //         image: imgUrl,
-//         questions: questions.filter(notNullObject),
-//         levels: levels.filter(notNullObject)
+//         questions: questions,
+//         levels: levels
 //     }
 
 //     console.log(createdQuizz);
