@@ -59,7 +59,7 @@ function createQuizz(){
         alert("Título inválido, precisa possuir entre 20 e 65 caracteres");
         erro++;
     }
-    if(imgUrl === ""){
+    if(!validURL(imgUrl)){
         alert("Por favor, insira uma imagem para seu quizz :)");
         erro++;
     }
