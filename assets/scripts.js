@@ -186,5 +186,24 @@ function sendError(){
 
 
 // Quizz Loading
+RequireQuizzes();
 
+function RequireQuizzes() {
+    const promessa = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes');
+    promessa.then(LoadQuizzes);
+}
+
+function LoadQuizzes(post) {
+    const quizzes = document.querySelector('.quizzes-box');
+    quizzes.innerHTML = '';
+    post.data.forEach(element => {
+        quizzes.innerHTML += `
+        <li class="quizz">
+            <img src="${element.image}" alt="">
+            <div class="gradient"></div>
+            <p>${element.title}</p>
+        </li>
+        `;
+    });
+}
 // Quizz Loading
