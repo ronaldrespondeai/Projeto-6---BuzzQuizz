@@ -31,6 +31,14 @@ body {
     width: 100%;
 }
 
+.home{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+}
+
 .create-quizz{
     width: 340px;
     height: 181px;

@@ -14,17 +14,19 @@
     </div>
     <div class="top-bar-aux"></div>
 
-    <div class="create-quizz hidden">
-        <p>Você não criou nenhum quizz ainda :(</p>
-        <button type="submit" onclick="createQuizz()">Criar Quizz</button>
+    <div class="home">
+        <div class="create-quizz">
+            <p>Você não criou nenhum quizz ainda :(</p>
+            <button type="submit" onclick="createQuizzStart()">Criar Quizz</button>
+        </div>
     </div>
 
-    <div class="create-screens screen-31">
+    <div class="create-screens screen-31 hidden">
         <strong>Comece pelo começo</strong>
         <div class="forms-container">
             <input class="create-quizz-title" required type="text" placeholder="Título do seu quizz" minlength="20" maxlength="65">
             <input class="create-quizz-img" required type="url" placeholder="URL da imagem do seu quizz">
-            <input class="create-quizz-questions" required type="number" min="1" placeholder="Quantidade de perguntas do quizz">
+            <input class="create-quizz-questions" required type="number" min="3" placeholder="Quantidade de perguntas do quizz">
             <input class="create-quizz-levels" required type="number" min="2" placeholder="Quantidade de níveis do quizz">
         </div>
         <button type="submit" class="create-quizz-buttons" onclick="createQuizz()">Prosseguir pra criar perguntas</button>
@@ -70,7 +72,7 @@
         <strong>Seu quizz está pronto!</strong>
         <img src="https://www.plataformamedia.com/wp-content/uploads/2020/06/imagem-preta.jpg">
         <button type="submit" class="create-quizz-buttons">Acessar Quizz</button>
-        <button type="submit">Voltar pra home</button>
+        <button type="submit" onclick="goHome(this)">Voltar pra home</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

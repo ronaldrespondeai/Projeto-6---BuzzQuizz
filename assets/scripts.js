@@ -4,6 +4,7 @@ const screen33 = document.querySelector(".screen-33");
 const screen34 = document.querySelector(".screen-34");
 const questionsContainer = document.querySelector(".screen-32 div:first-of-type");
 const levelsContainer = document.querySelector(".screen-33 div:first-of-type");
+const homePage = document.querySelector(".home");
 let title;
 let imgUrl;
 
@@ -13,6 +14,11 @@ function toggleHidden(element){
 
 function notNull(element){
     return element.text !== null
+}
+
+function createQuizzStart(){
+    toggleHidden(homePage);
+    toggleHidden(screen31);
 }
 
 function createQuizz(){
@@ -117,6 +123,10 @@ function createLevels(){
 
     toggleHidden(screen33);
     toggleHidden(screen34);
-
     return levels;
+}
+
+function goHome(element){
+    toggleHidden(homePage);
+    toggleHidden(element.parentNode);
 }
