@@ -22,44 +22,46 @@
     <div class="create-screens screen-31">
         <strong>Comece pelo começo</strong>
         <div class="forms-container">
-            <input required type="text" placeholder="Título do seu quizz" minlength="20" maxlength="65">
-            <input required type="url" placeholder="URL da imagem do seu quizz">
-            <input required type="number" min="3" placeholder="Quantidade de perguntas do quizz">
-            <input required type="number" min="2" placeholder="Quantidade de níveis do quizz">
+            <input class="create-quizz-title" required type="text" placeholder="Título do seu quizz" minlength="20" maxlength="65">
+            <input class="create-quizz-img" required type="url" placeholder="URL da imagem do seu quizz">
+            <input class="create-quizz-questions" required type="number" min="1" placeholder="Quantidade de perguntas do quizz">
+            <input class="create-quizz-levels" required type="number" min="2" placeholder="Quantidade de níveis do quizz">
         </div>
-        <button type="submit" class="create-quizz-buttons">Prosseguir pra criar perguntas</button>
+        <button type="submit" class="create-quizz-buttons" onclick="createQuizz()">Prosseguir pra criar perguntas</button>
     </div>
 
     <div class="create-screens screen-32 hidden">
         <strong>Crie suas perguntas</strong>
-        <div class="forms-container">
-            <strong>Pergunta 1</strong>
-            <input required type="text" placeholder="Texto da pergunta" minlength="20">
-            <input required type="text" placeholder="Cor de fundo da pergunta" pattern="#+.{6,}">
-            <strong>Resposta correta</strong>
-            <input required type="text" placeholder="Resposta correta">
-            <input required type="url" placeholder="URL da imagem">
-            <strong>Respostas incorretas</strong>
-            <input required type="text" placeholder="Resposta incorreta 1">
-            <input required type="url" placeholder="URL da imagem 1">
-            <input type="text" placeholder="Resposta incorreta 2">
-            <input type="url" placeholder="URL da imagem 2">
-            <input type="text" placeholder="Resposta incorreta 3">
-            <input type="url" placeholder="URL da imagem 3">
+        <div>
+            <div class="forms-container">
+                <strong>Pergunta 1</strong>
+                <input class="create-quizz-question" required type="text" placeholder="Texto da pergunta" minlength="20">
+                <input class="create-quizz-background" required type="text" placeholder="Cor de fundo da pergunta" pattern="#+.{6,}">
+                <strong>Resposta correta</strong>
+                <input class="create-quizz-answer" required type="text" placeholder="Resposta correta">
+                <input class="create-quizz-answerimg" required type="url" placeholder="URL da imagem">
+                <strong>Respostas incorretas</strong>
+                <input class="create-quizz-wronganswer" required type="text" placeholder="Resposta incorreta 1">
+                <input class="create-quizz-wronganswerimg" required type="url" placeholder="URL da imagem 1">
+                <input class="create-quizz-wronganswer" type="text" placeholder="Resposta incorreta 2">
+                <input class="create-quizz-wronganswerimg" type="url" placeholder="URL da imagem 2">
+                <input class="create-quizz-wronganswer" type="text" placeholder="Resposta incorreta 3">
+                <input class="create-quizz-wronganswerimg" type="url" placeholder="URL da imagem 3">
+            </div>
         </div>
-        <button type="submit" class="create-quizz-buttons">Prosseguir pra criar níveis</button>
+        <button type="submit" class="create-quizz-buttons" onclick="createQuestions()">Prosseguir pra criar níveis</button>
     </div>
 
     <div class="create-screens screen-33 hidden">
         <strong>Agora, decida os níveis!</strong>
         <div class="forms-container">
             <strong>Nível 1</strong>
-            <input required type="text" placeholder="Título do nível" minlength="10">
-            <input required type="number" placeholder="% de acerto mínima" min="0" max="100">
-            <input required type="url" placeholder="URL da imagem do nível">
-            <input required type="text" placeholder="Descrição do nível" minlength="30">
+            <input class="create-quizz-level-title" required type="text" placeholder="Título do nível" minlength="10">
+            <input class="create-quizz-level-min" required type="number" placeholder="% de acerto mínima" min="0" max="100">
+            <input class="create-quizz-level-img" required type="url" placeholder="URL da imagem do nível">
+            <input class="create-quizz-level-description" required type="text" placeholder="Descrição do nível" minlength="30">
         </div>
-        <button type="submit" class="create-quizz-buttons">Finalizar Quizz</button>
+        <button type="submit" class="create-quizz-buttons" onclick="createLevels()">Finalizar Quizz</button>
     </div>
 
     <div class="create-screens screen-34 hidden">
