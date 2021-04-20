@@ -3,6 +3,7 @@ const screen32 = document.querySelector(".screen-32");
 const screen33 = document.querySelector(".screen-33");
 const screen34 = document.querySelector(".screen-34");
 const questionsContainer = document.querySelector(".screen-32 div:first-of-type");
+const levelsContainer = document.querySelector(".screen-33 div:first-of-type");
 let title;
 let imgUrl;
 
@@ -21,6 +22,7 @@ function createQuizz(){
     const numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
 
     createQuestionsScreen(numberQuestions);
+    createLevelsScreen(numberLevels);
     toggleHidden(screen31);
     toggleHidden(screen32);
 }
@@ -50,7 +52,6 @@ function createQuestionsScreen(numberQuestions){
 
 function createQuestions(){
     const questionsAll = questionsContainer.querySelectorAll(".forms-container");
-    console.log(questionsAll);
     let questions = [];
 
     for(let i = 0; i<questionsAll.length; i++){
@@ -58,7 +59,6 @@ function createQuestions(){
 
         const answersWrong = questionsAll[i].querySelectorAll(".create-quizz-wronganswer");
         const answersWrongImg = questionsAll[i].querySelectorAll(".create-quizz-wronganswerimg");
-        console.log(questionsAll[i].querySelectorAll(".create-quizz-wronganswer"));
 
         answersArray[0] = {
             text: questionsAll[i].querySelector(".create-quizz-answer").value, 
@@ -81,6 +81,42 @@ function createQuestions(){
         answers: answersArray
     }
     }
+    toggleHidden(screen32);
+    toggleHidden(screen33);
 
-    console.log(questions);
+    return questions;
+}
+
+function createLevelsScreen(numberLevels){
+    levelsContainer.innerHTML = "";
+    for(let i = 1; i<numberLevels+1; i++){
+        levelsContainer.innerHTML += `
+        <div class="forms-container">
+        <strong>Nível ${i}</strong>
+        <input class="create-quizz-level-title" required type="text" placeholder="Título do nível" minlength="10">
+        <input class="create-quizz-level-min" required type="number" placeholder="% de acerto mínima" min="0" max="100">
+        <input class="create-quizz-level-img" required type="url" placeholder="URL da imagem do nível">
+        <input class="create-quizz-level-description" required type="text" placeholder="Descrição do nível" minlength="30">
+    </div>
+        `
+    }
+}
+
+function createLevels(){
+    const levelsAll = levelsContainer.querySelectorAll(".forms-container");
+    let levels = [];
+
+    for(let i = 0; i<levelsAll.length; i++){
+        levels.push({
+            title: levelsAll[i].querySelector(".create-quizz-level-title").value,
+            image: levelsAll[i].querySelector(".create-quizz-level-img").value,
+            text: levelsAll[i].querySelector(".create-quizz-level-description").value,
+            minValue: levelsAll[i].querySelector(".create-quizz-level-min").value
+        })
+    }
+
+    toggleHidden(screen33);
+    toggleHidden(screen34);
+
+    return levels;
 }

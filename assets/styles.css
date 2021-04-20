@@ -132,7 +132,7 @@ input::placeholder{
     padding-bottom: 24px;
 }
 
-.screen-32 div:first-of-type{
+.screen-32 div:first-of-type, .screen-33 div:first-of-type{
     width: 100%;
 }
 
