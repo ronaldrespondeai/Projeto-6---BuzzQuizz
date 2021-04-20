@@ -183,3 +183,8 @@ function sendSucess(){
 function sendError(){
     alert("Houve um problema na criação do seu quizz :(");
 }
+
+
+// Quizz Loading
+
+// Quizz Loading
