@@ -22,6 +22,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 10;
 }
 
 /* pra deixar a barra do topo fixa mas não precisar ficar somando o tamanho dela na margem dos outros elementos */
@@ -194,6 +195,7 @@ input::placeholder{
 .quizz {
     width: 340px;
     height: 181px;
+    margin-bottom: 14px;
     position: relative;
     display: flex;
 }
