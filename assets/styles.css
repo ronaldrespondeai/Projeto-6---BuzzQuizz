@@ -229,6 +229,12 @@ input::placeholder{
 /*Display Quizzes*/
 
 /*Selected Quizz*/
+.selected-quizz-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .selected-quizz-title {
     width: 100vw;
     height: 142px;
