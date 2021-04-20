@@ -7,6 +7,8 @@ const levelsContainer = document.querySelector(".screen-33 div:first-of-type");
 const homePage = document.querySelector(".home");
 let title;
 let imgUrl;
+let questions;
+let levels;
 
 function toggleHidden(element){
     element.classList.toggle("hidden");
@@ -58,7 +60,7 @@ function createQuestionsScreen(numberQuestions){
 
 function createQuestions(){
     const questionsAll = questionsContainer.querySelectorAll(".forms-container");
-    let questions = [];
+    questions = [];
 
     for(let i = 0; i<questionsAll.length; i++){
         let answersArray = [];
@@ -90,7 +92,6 @@ function createQuestions(){
     toggleHidden(screen32);
     toggleHidden(screen33);
 
-    return questions;
 }
 
 function createLevelsScreen(numberLevels){
@@ -110,7 +111,7 @@ function createLevelsScreen(numberLevels){
 
 function createLevels(){
     const levelsAll = levelsContainer.querySelectorAll(".forms-container");
-    let levels = [];
+    levels = [];
 
     for(let i = 0; i<levelsAll.length; i++){
         levels.push({
@@ -123,10 +124,34 @@ function createLevels(){
 
     toggleHidden(screen33);
     toggleHidden(screen34);
-    return levels;
+    sendCreatedQuizz();
 }
 
 function goHome(element){
     toggleHidden(homePage);
     toggleHidden(element.parentNode);
 }
+
+// function sendCreatedQuizz(){
+//     const createdQuizz = {
+//         title: title,
+//         image: imgUrl,
+//         questions: questions,
+//         levels: levels
+//     }
+
+//     console.log(createdQuizz);
+
+//     const sendQuizz = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes", createdQuizz);
+
+//     sendQuizz.then(sendSucess);
+//     sendQuizz.catch(sendError);
+// }
+
+// function sendSucess(){
+//     alert("Seu quizz foi enviado com sucesso!");
+// }
+
+// function sendError(){
+//     alert("Houve um problema na criação do seu quizz :(");
+// }
