@@ -38,11 +38,12 @@ function createQuizz(){
         alert("Por favor, insira uma imagem para seu quizz :)");
         erro++;
     }
-    if(numberQuestions < 3){
+    if(numberQuestions < 3 || !!numberQuestions === !!NaN){
         alert("Por favor, insira um número de perguntas maior que 2");
         erro++;
     }
-    if(numberLevels < 2){
+
+    if(numberLevels < 2 || !!numberLevels === !!NaN){
         alert("Por favor, insira um número de níveis maior que 1");
         erro++;
     }
