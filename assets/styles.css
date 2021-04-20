@@ -88,6 +88,10 @@ input {
     padding: 13px;
 }
 
+input:invalid{
+    color: red;
+}
+
 input:last-of-type{
     margin-bottom: 0;
 }
@@ -156,11 +160,11 @@ input::placeholder{
     font-size: 18px;
 }
 
-.hidden{
-    display: none;
-}
+
+/* fiz o mobile e dps adicionei as alterações para desktop */
 
 @media (min-width: 1100px) {
+
     .create-quizz{
         width: 80%;
     }
@@ -169,4 +173,8 @@ input::placeholder{
         width: 42vw;
     }
 
+}
+
+.hidden{
+    display: none;
 }
