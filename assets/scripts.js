@@ -28,11 +28,31 @@ function createQuizz(){
     imgUrl = document.querySelector(".create-quizz-img").value;
     const numberQuestions = parseInt(document.querySelector(".create-quizz-questions").value);
     const numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
+    let erro = 0;
 
-    createQuestionsScreen(numberQuestions);
-    createLevelsScreen(numberLevels);
-    toggleHidden(screen31);
-    toggleHidden(screen32);
+    if(title.length < 20 || title.length > 65){
+        alert("Título inválido, precisa possuir entre 20 e 65 caracteres");
+        erro++;
+    }
+    if(imgUrl === ""){
+        alert("Por favor, insira uma imagem para seu quizz :)");
+        erro++;
+    }
+    if(numberQuestions < 3){
+        alert("Por favor, insira um número de perguntas maior que 2");
+        erro++;
+    }
+    if(numberLevels < 2){
+        alert("Por favor, insira um número de níveis maior que 1");
+        erro++;
+    }
+    
+    if(erro === 0){
+        createQuestionsScreen(numberQuestions);
+        createLevelsScreen(numberLevels);
+        toggleHidden(screen31);
+        toggleHidden(screen32);
+    }
 }
 
 function createQuestionsScreen(numberQuestions){
