@@ -126,6 +126,26 @@ input::placeholder{
     padding-bottom: 20px;
 }
 
+.screen-34 img{
+    width:340px; 
+    height:181px;
+    margin: 29px auto 24px auto;
+    border-radius: 5px;
+}
+
+.screen-34 button{
+    width: 220px;
+    height: 44px;
+}
+
+.screen-34 button:last-of-type{
+    margin-top: 9px;
+    background-color: transparent;
+    border: none;
+    color: #818181;
+    font-size: 18px;
+}
+
 .hidden{
     display: none;
 }
