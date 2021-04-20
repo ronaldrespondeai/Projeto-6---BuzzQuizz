@@ -6,6 +6,7 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: #FAFAFA;
+    padding-bottom: 40px;
 }
 
 .top-bar{
@@ -78,15 +79,6 @@ input {
     padding: 13px;
 }
 
-.screen-31 input{
-    margin-bottom: 9px;
-}
-
-.screen-31{
-    padding-top: 21px;
-    padding-bottom: 24px;
-}
-
 input:last-of-type{
     margin-bottom: 0;
 }
@@ -115,6 +107,23 @@ input::placeholder{
     font-size: 18px;
     border: none;
     color: #FFF5F4;
+}
+
+.screen-31 input{
+    margin-bottom: 9px;
+}
+
+.screen-31 .forms-container{
+    padding-top: 21px;
+    padding-bottom: 24px;
+}
+
+.screen-33 .forms-container input:last-of-type{
+    height: 177px;
+}
+
+.screen-33 .forms-container{
+    padding-bottom: 20px;
 }
 
 .hidden{
