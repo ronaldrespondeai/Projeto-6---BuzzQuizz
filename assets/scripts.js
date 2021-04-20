@@ -243,7 +243,7 @@ function LoadQuizzes(post) {
     quizzes.innerHTML = '';
     post.data.forEach(element => {
         quizzes.innerHTML += `
-        <li class="quizz" onclick="RequireQuizz(${element.id})">
+        <li class="quizz quizz${element.id}" onclick="RequireQuizz(${element.id})">
             <img src="${element.image}" alt="">
             <div class="gradient"></div>
             <p>${element.title}</p>
@@ -268,11 +268,40 @@ function LoadQuizz(post) {
 
     const quizz = post.data;
     
-    
+    quizzPage.innerHTML = `
+    <div class="selected-quizz-title">
+        <img src="${quizz.image}" alt="">
+        <div class="gradient"></div>
+        <span>${quizz.title}</span>
+    </div>
+    `;
 
+    quizz.questions.forEach(element => {
+        quizzPage.innerHTML += `
+        <div class="selected-quizz-box">
+            <div class="question" style="background-color: ${element.color};"><strong>${element.title}</strong></div>
+            <div onclick="ChecarResposta(${element.answers[0].isCorrectAnswer})">
+                <img src="${element.answers[0].image}" alt="">
+                <p>${element.answers[0].text}</p>
+            </div>
+            <div onclick="ChecarResposta(${element.answers[1].isCorrectAnswer})">
+                <img src="${element.answers[1].image}" alt="">
+                <p>${element.answers[1].text}</p>
+            </div>
+            <div onclick="ChecarResposta(${element.answers[2].isCorrectAnswer})">
+                <img src="${element.answers[2].image}" alt="">
+                <p>${element.answers[2].text}</p>
+            </div>
+            <div onclick="ChecarResposta(${element.answers[3].isCorrectAnswer})">
+                <img src="${element.answers[3].image}" alt="">
+                <p>${element.answers[3].text}</p>
+            </div>
+        </div>
+        `;
+    });
 }
-
-/* formato loadquizz const quizz :
+/*
+*******************formato loadquizz const quizz :
 id: 1,
 title: "Título do quizz",
 image: "https://http.cat/411.jpg",
