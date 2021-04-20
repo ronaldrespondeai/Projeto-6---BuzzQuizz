@@ -243,7 +243,7 @@ input::placeholder{
     align-items: center;
     text-align: center;
     position: relative;
-    margin-bottom: 42px;
+    margin-bottom: 24px;
 }
 
 .selected-quizz-title img {
@@ -308,7 +308,6 @@ input::placeholder{
     font-weight: bold;
     line-height: 15px;
 }
-
 /*Selected Quizz*/
 
 
@@ -373,7 +372,6 @@ input::placeholder{
         font-size: 20px;
         line-height: 23px;
     }
-
     /*Selected Quizz*/
 
 }
