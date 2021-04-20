@@ -9,18 +9,31 @@
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+    <!--Barra topo-->
     <div class="top-bar">
         <strong>BuzzQuizz</strong>
     </div>
     <div class="top-bar-aux"></div>
+    <!--Barra topo-->
 
+    <!--Home-->
     <div class="home">
         <div class="create-quizz">
             <p>Você não criou nenhum quizz ainda :(</p>
             <button type="submit" onclick="createQuizzStart()">Criar Quizz</button>
         </div>
-    </div>
 
+        <!--Seus quizzes-->
+        <!--Seus quizzes-->
+
+        <!--Todos os quizzes-->
+        <div class="quizzes-title">Todos os Quizzes</div>
+        <ul class="quizzes-box"></ul>
+        <!--Todos os quizzes-->
+    </div>
+    <!--Home-->
+
+    <!--Criação de quizz-->
     <div class="create-screens screen-31 hidden">
         <strong>Comece pelo começo</strong>
         <div class="forms-container">
@@ -74,6 +87,7 @@
         <button type="submit" class="create-quizz-buttons">Acessar Quizz</button>
         <button type="submit" onclick="goHome(this)">Voltar pra home</button>
     </div>
+    <!--Criação de quizz-->
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="assets/scripts.js"></script>
