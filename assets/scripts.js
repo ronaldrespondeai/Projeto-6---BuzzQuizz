@@ -39,7 +39,7 @@ function validURL(str) {
   }
 
 function validColor(str) {
-    var pattern = new RegExp('#+.{6,}');
+    var pattern = new RegExp('#+.{6}');
     return !!pattern.test(str);
 }
 
