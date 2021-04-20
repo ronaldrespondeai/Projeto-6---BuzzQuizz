@@ -208,6 +208,8 @@ input::placeholder{
 
 .quizz .gradient {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     border-radius: 5px;
@@ -219,6 +221,7 @@ input::placeholder{
     line-height: 22px;
     color: #FFF;
     position: absolute;
+    word-break: break-all;
     left: 18px;
     bottom: 14px;
     margin-right: 21px;
@@ -226,7 +229,7 @@ input::placeholder{
 /*Display Quizzes*/
 
 /*Selected Quizz*/
-.quizz-title {
+.selected-quizz-title {
     width: 100vw;
     height: 142px;
     display: flex;
@@ -234,25 +237,72 @@ input::placeholder{
     align-items: center;
     text-align: center;
     position: relative;
+    margin-bottom: 42px;
 }
 
-.quizz-title img {
-    object-fit: fit;
-}
-
-.quizz-title .gradient {
+.selected-quizz-title img {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.selected-quizz-title .gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.quizz-title span {
-    position: absolute;
+.selected-quizz-title span {
     font-size: 19px;
     line-height: 22px;
     color: #FFF;
+    z-index: 1;
 }
+
+.selected-quizz-box {
+    width: 375px;
+    height: 436px;
+    padding: 18px 17px 23px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    background-color: #FFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+.selected-quizz-box .question {
+    width: 340px;
+    height: 89px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #FFF;
+    font-size: 19px;
+    line-height: 22px;
+}
+
+.selected-quizz-box img {
+    width: 163px;
+    height: 113px;
+    object-fit: cover;
+}
+
+.selected-quizz-box p {
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 15px;
+}
+
 /*Selected Quizz*/
 
 
@@ -281,9 +331,44 @@ input::placeholder{
         margin-right: 16px;
     }
 
+    .quizz-title span {
+        font-size: 39px;
+    }
+
     .create-screens{
         width: 42vw;
     }
+
+    /*Selected Quizz*/
+    .selected-quizz-title span {
+        font-size: 39px;
+        line-height: 45px;
+    }
+
+    .selected-quizz-box {
+        width: 759px;
+        height: 676px;
+        padding: 28px 34px 35px 36px;
+    }
+
+    .selected-quizz-box .question {
+        width: 688px;
+        height: 138px;
+        font-size: 23px;
+        line-height: 27px;
+    }
+
+    .selected-quizz-box img {
+        width: 330px;
+        height: 175px;
+    }
+
+    .selected-quizz-box p {
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    /*Selected Quizz*/
 
 }
 

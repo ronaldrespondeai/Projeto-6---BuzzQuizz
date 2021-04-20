@@ -261,10 +261,37 @@ function RequireQuizz(id) {
 
 function LoadQuizz(post) {
     const home = document.querySelector('.home');
-    const quizzPage = document.querySelector('.quizz-page');
-    const quizz = post.data;
     home.classList.add('hidden');
+
+    const quizzPage = document.querySelector('.selected-quizz-page');
     quizzPage.classList.remove('hidden');
 
+    const quizz = post.data;
+    
+    
+
 }
+
+/* formato loadquizz const quizz :
+id: 1,
+title: "Título do quizz",
+image: "https://http.cat/411.jpg",
+questions: [
+    {
+        title: "Título da pergunta 1",
+        color: "#123456",
+        answers: [
+            {
+                text: "Texto da resposta 1",
+                image: "https://http.cat/411.jpg",
+                isCorrectAnswer: true
+            },
+            {
+                text: "Texto da resposta 2",
+                image: "https://http.cat/412.jpg",
+                isCorrectAnswer: false
+            }
+        ]
+    },
+*/
 // Quizz Loading
