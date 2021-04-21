@@ -11,6 +11,9 @@ let questions;
 let levels;
 let numberLevels=0;
 
+const userIds = [1, 2]; //GetUserIds(); //para o localStorage.(set/get)Item
+//console.log(userIds);
+
 function toggleHidden(element){
     element.classList.toggle("hidden");
 }
@@ -281,17 +284,28 @@ function RequireQuizzes() {
 }
 
 function LoadQuizzes(post) {
-    const allQuizzes = document.querySelector('.all-quizzes');
-    allQuizzes.innerHTML = '';
+    const ulAllQuizzes = document.querySelector('.ul-all-quizzes');
+    ulAllQuizzes.innerHTML = '';
 
-    const userQuizzes = document.querySelector('.user-quizzes');
-    userQuizzes.innerHTML = '';
+    const ulUserQuizzes = document.querySelector('.ul-user-quizzes');
+    ulUserQuizzes.innerHTML = '';
 
-    const userIds = localStorage.getItem('userIds')
-
-    console.log(post.data)
-    post.data.forEach(element => {
-            allQuizzes.innerHTML += `
+    const quizzes = post.data;
+    const userQuizzes = quizzes.filter(CheckUserIds); //apenas os que tem id contido em userIds
+    const allQuizzes = quizzes.filter(UnCheckUserIds); //todos que não tem id contido em userIds
+    console.log(allQuizzes);
+    
+    userQuizzes.forEach(element => {
+        ulUserQuizzes.innerHTML += `
+        <li class="quizz quizz${element.id}" onclick="RequireQuizz(${element.id})">
+            <img src="${element.image}" alt="">
+            <div class="gradient"></div>
+            <p>${element.title}</p>
+        </li>
+        `;
+    });
+    allQuizzes.forEach(element => {
+            ulAllQuizzes.innerHTML += `
             <li class="quizz quizz${element.id}" onclick="RequireQuizz(${element.id})">
                 <img src="${element.image}" alt="">
                 <div class="gradient"></div>
@@ -299,6 +313,14 @@ function LoadQuizzes(post) {
             </li>
             `;
     });
+
+    if (ulUserQuizzes.innerHTML != '') {
+        const divUserQuizzes = document.querySelector('.user-quizzes');
+        divUserQuizzes.classList.remove('hidden');
+
+        const divCreateQuizz = document.querySelector('.create-quizz');
+        divCreateQuizz.classList.add('hidden');
+    }
 }
 
 function RequireQuizz(id) {
@@ -382,3 +404,26 @@ function Shuffle() {
     return (Math.random() - 0.5);
 }
 // Quizz Loading
+
+function GetUserIds() {
+    let Ids = [];
+    if (localStorage.getItem('userIds') !== null) {
+        Ids = localStorage.getItem('userIds');
+    }
+    return Ids;
+}
+
+function CheckUserIds(obj) {
+    if (obj != undefined) {
+        for(let i = 0; i<userIds.length; i++){
+            if (obj.id == userIds[i]){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function UnCheckUserIds(obj) {
+    return !CheckUserIds(obj);
+}
