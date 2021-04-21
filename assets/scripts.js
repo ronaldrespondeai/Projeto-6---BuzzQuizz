@@ -289,14 +289,15 @@ function RequireQuizzes() {
 function LoadQuizzes(post) {
     const quizzes = document.querySelector('.quizzes-box');
     quizzes.innerHTML = '';
+    console.log(post.data)
     post.data.forEach(element => {
-        quizzes.innerHTML += `
-        <li class="quizz quizz${element.id}" onclick="RequireQuizz(${element.id})">
-            <img src="${element.image}" alt="">
-            <div class="gradient"></div>
-            <p>${element.title}</p>
-        </li>
-        `;
+            quizzes.innerHTML += `
+            <li class="quizz quizz${element.id}" onclick="RequireQuizz(${element.id})">
+                <img src="${element.image}" alt="">
+                <div class="gradient"></div>
+                <p>${element.title}</p>
+            </li>
+            `;
     });
 }
 
@@ -316,6 +317,7 @@ function LoadQuizz(post) {
 
     const quizz = post.data;
     
+    // Titulo do quizz
     quizzPage.innerHTML = `
     <div class="selected-quizz-title">
         <img src="${quizz.image}" alt="">
@@ -324,29 +326,33 @@ function LoadQuizz(post) {
     </div>
     `;
 
+    //Perguntas do quizz (para cada pergunta...)
     quizz.questions.forEach(element => {
+        const answers = element.answers;
+        answers.sort(Shuffle);
+        //Titulo da pergunta
         quizzPage.innerHTML += `
         <div class="selected-quizz-box">
-            <div class="question" style="background-color: ${element.color};"><strong>${element.title}</strong></div>
-            <div onclick="ChecarResposta(${element.answers[0].isCorrectAnswer})">
-                <img src="${element.answers[0].image}" alt="">
-                <p>${element.answers[0].text}</p>
-            </div>
-            <div onclick="ChecarResposta(${element.answers[1].isCorrectAnswer})">
-                <img src="${element.answers[1].image}" alt="">
-                <p>${element.answers[1].text}</p>
-            </div>
-            <div onclick="ChecarResposta(${element.answers[2].isCorrectAnswer})">
-                <img src="${element.answers[2].image}" alt="">
-                <p>${element.answers[2].text}</p>
-            </div>
-            <div onclick="ChecarResposta(${element.answers[3].isCorrectAnswer})">
-                <img src="${element.answers[3].image}" alt="">
-                <p>${element.answers[3].text}</p>
+            <div class="question" style="background-color: ${element.color};">
+                <strong>${element.title}</strong>
             </div>
         </div>
         `;
+        const question = document.querySelector('.selected-quizz-box:last-child');
+        //Respostas
+        answers.forEach(element => {
+            question.innerHTML += `
+                <div onclick="AnswerCheck(${element.isCorrectAnswer})">
+                    <img src="${element.image}" alt="">
+                    <p>${element.text}</p>
+                </div>
+            `;
+        })
     });
+}
+
+function AnswerCheck(bool) {
+
 }
 /*
 *******************formato loadquizz const quizz :
@@ -371,4 +377,8 @@ questions: [
         ]
     },
 */
+
+function Shuffle() {
+    return (Math.random() - 0.5);
+}
 // Quizz Loading

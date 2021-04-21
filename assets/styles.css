@@ -178,8 +178,8 @@ input::placeholder{
 .quizzes-title {
     width: 340px;
     display: flex;
-    justify-content: flex-start;
-    margin-top: 35px;
+    justify-content: space-between;
+    margin-top: 38px;
     margin-bottom: 14px;
 
     font-size: 20px;
@@ -304,6 +304,7 @@ input::placeholder{
 }
 
 .selected-quizz-box p {
+    word-break: break-all;
     margin-top: 5px;
     font-size: 13px;
     font-weight: bold;
