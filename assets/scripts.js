@@ -108,6 +108,7 @@ function createQuestionsScreen(numberQuestions){
     }
 }
 
+screen32.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuestions()}});
 function createQuestions(){
     const questionsAll = questionsContainer.querySelectorAll(".forms-container");
     questions = [];
@@ -207,6 +208,7 @@ function validLevel(title,minValue,image,text,i,erros){
     return erros
 }
 
+screen33.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createLevels()}});
 function createLevels(){
     const levelsAll = levelsContainer.querySelectorAll(".forms-container");
     levels = [];
