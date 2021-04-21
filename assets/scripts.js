@@ -64,8 +64,8 @@ function createQuizz(){
         alert("Por favor, insira uma imagem para seu quizz :)");
         erro++;
     }
-    // voltar para menor que 4 aqui !! 
-    if(numberQuestions < 0 || !!numberQuestions === !!NaN){
+
+    if(numberQuestions < 4 || !!numberQuestions === !!NaN){
         alert("Por favor, insira um número de perguntas maior que 2");
         erro++;
     }
@@ -212,10 +212,10 @@ function createLevels(){
     let auxLevel = 1;
     for(let i = 0; i<levelsAll.length; i++){
 
-        const title = levelsAll[i].querySelector(".create-quizz-level-title").value
-        const image = levelsAll[i].querySelector(".create-quizz-level-img").value
-        const text = levelsAll[i].querySelector(".create-quizz-level-description").value
-        const minValue = levelsAll[i].querySelector(".create-quizz-level-min").value
+        const title = levelsAll[i].querySelector(".create-quizz-level-title").value;
+        const image = levelsAll[i].querySelector(".create-quizz-level-img").value;
+        const text = levelsAll[i].querySelector(".create-quizz-level-description").value;
+        const minValue = parseInt(levelsAll[i].querySelector(".create-quizz-level-min").value);
 
         erros += validLevel(title,minValue,image,text,i,erros);
         auxLevel *= minValue;
@@ -226,14 +226,6 @@ function createLevels(){
             text: text,
             minValue: minValue
         })
-    }
-
-
-    levels = levels.filter(notNullObject);
-
-    if(levels.length < numberLevels){
-        alert("Por favor, preencha corretamente todos os campos!");
-        erros++;
     }
 
     if(auxLevel !== 0){
@@ -253,21 +245,19 @@ function goHome(element){
     toggleHidden(element.parentNode);
 }
 
-// function sendCreatedQuizz(){
-//     const createdQuizz = {
-//         title: title,
-//         image: imgUrl,
-//         questions: questions,
-//         levels: levels
-//     }
+function sendCreatedQuizz(){
+    const createdQuizz = {
+        title: title,
+        image: imgUrl,
+        questions: questions,
+        levels: levels
+    }
 
-//     console.log(createdQuizz);
+    const sendQuizz = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes", createdQuizz);
 
-//     const sendQuizz = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes", createdQuizz);
-
-//     sendQuizz.then(sendSucess);
-//     sendQuizz.catch(sendError);
-// }
+    sendQuizz.then(sendSucess);
+    sendQuizz.catch(sendError);
+}
 
 function sendSucess(){
     alert("Seu quizz foi enviado com sucesso!");
