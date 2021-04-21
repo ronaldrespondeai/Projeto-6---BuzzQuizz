@@ -24,17 +24,18 @@
         </div>
 
         <!--Seus quizzes-->
-        <div class="user-quizzes hidden">
+        <div class="user-quizzes">
             <div class="quizzes-title">
                 <span>Seus Quizzes</span>
-                <!--ion-icon (+)-->
+                <ion-icon name="add-circle" class="add-quizz" onclick="createQuizzStart()"></ion-icon>
             </div>
+            <ul class="quizzes-box user-quizzes"></ul>
         </div>
         <!--Seus quizzes-->
 
         <!--Todos os quizzes-->
         <div class="quizzes-title">Todos os Quizzes</div>
-        <ul class="quizzes-box">
+        <ul class="quizzes-box all-quizzes">
             <li class="quizz exemplo">
                 <img src="https://super.abril.com.br/wp-content/uploads/2018/07/566ee0ae82bee174ca0300dahomer-simpson.jpeg" alt="">
                 <div class="gradient"></div>
@@ -111,6 +112,7 @@
     </div>
     <!--Selected-Quizz!-->
 
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="assets/scripts.js"></script>
 </body>

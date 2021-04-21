@@ -272,7 +272,7 @@ function sendError(){
 }
 
 
-// Quizz Loading
+// Quizz Loading                        //localStorage.setItem('userIds', [user ids])
 RequireQuizzes();
 
 function RequireQuizzes() {
@@ -281,11 +281,17 @@ function RequireQuizzes() {
 }
 
 function LoadQuizzes(post) {
-    const quizzes = document.querySelector('.quizzes-box');
-    quizzes.innerHTML = '';
+    const allQuizzes = document.querySelector('.all-quizzes');
+    allQuizzes.innerHTML = '';
+
+    const userQuizzes = document.querySelector('.user-quizzes');
+    userQuizzes.innerHTML = '';
+
+    const userIds = localStorage.getItem('userIds')
+
     console.log(post.data)
     post.data.forEach(element => {
-            quizzes.innerHTML += `
+            allQuizzes.innerHTML += `
             <li class="quizz quizz${element.id}" onclick="RequireQuizz(${element.id})">
                 <img src="${element.image}" alt="">
                 <div class="gradient"></div>
