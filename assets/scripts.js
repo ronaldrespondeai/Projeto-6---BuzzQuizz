@@ -49,6 +49,8 @@ function createQuizzStart(){
     toggleHidden(screen31);
 }
 
+screen31.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuizz()}});
+
 function createQuizz(){
     title = document.querySelector(".create-quizz-title").value;
     imgUrl = document.querySelector(".create-quizz-img").value;
@@ -65,7 +67,7 @@ function createQuizz(){
         erro++;
     }
 
-    if(numberQuestions < 4 || !!numberQuestions === !!NaN){
+    if(numberQuestions < 3 || !!numberQuestions === !!NaN){
         alert("Por favor, insira um número de perguntas maior que 2");
         erro++;
     }
