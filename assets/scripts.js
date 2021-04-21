@@ -9,6 +9,7 @@ let title;
 let imgUrl;
 let questions;
 let levels;
+let numberLevels=0;
 
 function toggleHidden(element){
     element.classList.toggle("hidden");
@@ -52,7 +53,7 @@ function createQuizz(){
     title = document.querySelector(".create-quizz-title").value;
     imgUrl = document.querySelector(".create-quizz-img").value;
     const numberQuestions = parseInt(document.querySelector(".create-quizz-questions").value);
-    const numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
+    numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
     let erro = 0;
 
     if(title.length < 20 || title.length > 65){
@@ -89,7 +90,7 @@ function createQuestionsScreen(numberQuestions){
         <div class="forms-container">
         <strong>Pergunta ${i}</strong>
         <input class="create-quizz-question" required type="text" placeholder="Texto da pergunta" minlength="20">
-        <input class="create-quizz-background" required type="text" placeholder="Cor de fundo da pergunta" pattern="#+.{6,}">
+        <input class="create-quizz-background" required type="text" placeholder="Cor de fundo da pergunta" pattern="#+.{6}">
         <strong>Resposta correta</strong>
         <input class="create-quizz-answer" required type="text" placeholder="Resposta correta">
         <input class="create-quizz-answerimg" required type="url" placeholder="URL da imagem">
@@ -180,24 +181,71 @@ function createLevelsScreen(numberLevels){
     }
 }
 
+function validLevel(title,minValue,image,text,i,erros){
+    if(title.length < 10){
+        alert(`O título do nível ${i+1} precisa ter ao menos 10 caracteres!`);
+        erros++;
+    }
+
+    if(minValue > 100){
+        alert(`O valor mínimo do nível ${i+1} precisa estar entre 0 e 100`);
+        erros++;
+    }
+    
+    if(!validURL(image)){
+        alert(`Insira um link válido para a imagem do nível ${i+1}!`);
+        erros++;
+    }
+
+    if(text < 30){
+        alert(`O texto do nível ${i+1} precisa ter ao menos 30 caracteres!`);
+        erros++;
+    }
+
+    return erros
+}
+
 function createLevels(){
     const levelsAll = levelsContainer.querySelectorAll(".forms-container");
     levels = [];
-
+    let erros = 0;
+    let auxLevel = 1;
     for(let i = 0; i<levelsAll.length; i++){
+
+        const title = levelsAll[i].querySelector(".create-quizz-level-title").value
+        const image = levelsAll[i].querySelector(".create-quizz-level-img").value
+        const text = levelsAll[i].querySelector(".create-quizz-level-description").value
+        const minValue = levelsAll[i].querySelector(".create-quizz-level-min").value
+
+        erros += validLevel(title,minValue,image,text,i,erros);
+        auxLevel *= minValue;
+
         levels.push({
-            title: levelsAll[i].querySelector(".create-quizz-level-title").value,
-            image: levelsAll[i].querySelector(".create-quizz-level-img").value,
-            text: levelsAll[i].querySelector(".create-quizz-level-description").value,
-            minValue: levelsAll[i].querySelector(".create-quizz-level-min").value
+            title: title,
+            image: image,
+            text: text,
+            minValue: minValue
         })
     }
 
+
     levels = levels.filter(notNullObject);
 
-    toggleHidden(screen33);
-    toggleHidden(screen34);
-    sendCreatedQuizz();
+    if(levels.length < numberLevels){
+        alert("Por favor, preencha corretamente todos os campos!");
+        erros++;
+    }
+
+    if(auxLevel !== 0){
+        alert("Pelo menos um nível precisa começar em 0!");
+        erros++;
+    }
+
+    if(erros === 0){
+        toggleHidden(screen33);
+        toggleHidden(screen34);
+        sendCreatedQuizz();
+    }
 }
 
 function goHome(element){
