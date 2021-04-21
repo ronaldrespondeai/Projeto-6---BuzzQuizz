@@ -49,6 +49,8 @@ function createQuizzStart(){
     toggleHidden(screen31);
 }
 
+screen31.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuizz()}});
+
 function createQuizz(){
     title = document.querySelector(".create-quizz-title").value;
     imgUrl = document.querySelector(".create-quizz-img").value;
@@ -64,8 +66,8 @@ function createQuizz(){
         alert("Por favor, insira uma imagem para seu quizz :)");
         erro++;
     }
-    // voltar para menor que 4 aqui !! 
-    if(numberQuestions < 0 || !!numberQuestions === !!NaN){
+
+    if(numberQuestions < 3 || !!numberQuestions === !!NaN){
         alert("Por favor, insira um número de perguntas maior que 2");
         erro++;
     }
@@ -106,6 +108,7 @@ function createQuestionsScreen(numberQuestions){
     }
 }
 
+screen32.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuestions()}});
 function createQuestions(){
     const questionsAll = questionsContainer.querySelectorAll(".forms-container");
     questions = [];
@@ -205,6 +208,7 @@ function validLevel(title,minValue,image,text,i,erros){
     return erros
 }
 
+screen33.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createLevels()}});
 function createLevels(){
     const levelsAll = levelsContainer.querySelectorAll(".forms-container");
     levels = [];
@@ -212,10 +216,10 @@ function createLevels(){
     let auxLevel = 1;
     for(let i = 0; i<levelsAll.length; i++){
 
-        const title = levelsAll[i].querySelector(".create-quizz-level-title").value
-        const image = levelsAll[i].querySelector(".create-quizz-level-img").value
-        const text = levelsAll[i].querySelector(".create-quizz-level-description").value
-        const minValue = levelsAll[i].querySelector(".create-quizz-level-min").value
+        const title = levelsAll[i].querySelector(".create-quizz-level-title").value;
+        const image = levelsAll[i].querySelector(".create-quizz-level-img").value;
+        const text = levelsAll[i].querySelector(".create-quizz-level-description").value;
+        const minValue = parseInt(levelsAll[i].querySelector(".create-quizz-level-min").value);
 
         erros += validLevel(title,minValue,image,text,i,erros);
         auxLevel *= minValue;
@@ -226,14 +230,6 @@ function createLevels(){
             text: text,
             minValue: minValue
         })
-    }
-
-
-    levels = levels.filter(notNullObject);
-
-    if(levels.length < numberLevels){
-        alert("Por favor, preencha corretamente todos os campos!");
-        erros++;
     }
 
     if(auxLevel !== 0){
@@ -253,21 +249,19 @@ function goHome(element){
     toggleHidden(element.parentNode);
 }
 
-// function sendCreatedQuizz(){
-//     const createdQuizz = {
-//         title: title,
-//         image: imgUrl,
-//         questions: questions,
-//         levels: levels
-//     }
+function sendCreatedQuizz(){
+    const createdQuizz = {
+        title: title,
+        image: imgUrl,
+        questions: questions,
+        levels: levels
+    }
 
-//     console.log(createdQuizz);
+    const sendQuizz = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes", createdQuizz);
 
-//     const sendQuizz = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes", createdQuizz);
-
-//     sendQuizz.then(sendSucess);
-//     sendQuizz.catch(sendError);
-// }
+    sendQuizz.then(sendSucess);
+    sendQuizz.catch(sendError);
+}
 
 function sendSucess(){
     alert("Seu quizz foi enviado com sucesso!");

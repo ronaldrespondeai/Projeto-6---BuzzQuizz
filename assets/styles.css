@@ -9,6 +9,10 @@ body {
     padding-bottom: 40px;
 }
 
+.top-bar, button{
+    cursor: pointer;
+}
+
 .top-bar{
     background-color: #EC362D;
     width: 100%;
