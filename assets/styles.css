@@ -116,6 +116,7 @@ input::placeholder{
     align-items: center;
     flex-direction: column;
     width: 100vw;
+    margin-top: 37px;
 }
 
 .create-screens strong{

@@ -55,19 +55,6 @@
         <strong>Crie suas perguntas</strong>
         <div>
             <div class="forms-container">
-                <strong>Pergunta 1</strong>
-                <input class="create-quizz-question" required type="text" placeholder="Texto da pergunta" minlength="20">
-                <input class="create-quizz-background" required type="text" placeholder="Cor de fundo da pergunta" pattern="#+.{6,}">
-                <strong>Resposta correta</strong>
-                <input class="create-quizz-answer" required type="text" placeholder="Resposta correta">
-                <input class="create-quizz-answerimg" required type="url" placeholder="URL da imagem">
-                <strong>Respostas incorretas</strong>
-                <input class="create-quizz-wronganswer" required type="text" placeholder="Resposta incorreta 1">
-                <input class="create-quizz-wronganswerimg" required type="url" placeholder="URL da imagem 1">
-                <input class="create-quizz-wronganswer" type="text" placeholder="Resposta incorreta 2">
-                <input class="create-quizz-wronganswerimg" type="url" placeholder="URL da imagem 2">
-                <input class="create-quizz-wronganswer" type="text" placeholder="Resposta incorreta 3">
-                <input class="create-quizz-wronganswerimg" type="url" placeholder="URL da imagem 3">
             </div>
         </div>
         <button type="submit" class="create-quizz-buttons" onclick="createQuestions()">Prosseguir pra criar níveis</button>
@@ -77,11 +64,6 @@
         <strong>Agora, decida os níveis!</strong>
         <div>
             <div class="forms-container">
-                <strong>Nível 1</strong>
-                <input class="create-quizz-level-title" required type="text" placeholder="Título do nível" minlength="10">
-                <input class="create-quizz-level-min" required type="number" placeholder="% de acerto mínima" min="0" max="100">
-                <input class="create-quizz-level-img" required type="url" placeholder="URL da imagem do nível">
-                <input class="create-quizz-level-description" required type="text" placeholder="Descrição do nível" minlength="30">
             </div>
         </div>
         <button type="submit" class="create-quizz-buttons" onclick="createLevels()">Finalizar Quizz</button>
