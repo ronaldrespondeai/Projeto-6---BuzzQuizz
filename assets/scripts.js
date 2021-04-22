@@ -6,16 +6,14 @@ const questionsContainer = document.querySelector(".quizz-questions-screen div:f
 const levelsContainer = document.querySelector(".quizz-levels-screen div:first-of-type");
 const homePage = document.querySelector(".home");
 const quizzResult = document.querySelectorAll(".result");
-const quizzResultContainer = document.querySelector(".quizz-result");
 let title;
 let imgUrl;
 let questions;
 let levels;
-let numberLevels=0;
 let correctAnswers=0;
 let answered=0;
 const userIds = GetUserIds().split(","); //para o localStorage.(set/get)Item
-let numberQuestions=0;
+let numberOfQuestions=0;
 
 function toggleHidden(element){
     element.classList.toggle("hidden");
@@ -61,7 +59,7 @@ function createQuizz(){
     title = document.querySelector(".create-quizz-title").value;
     imgUrl = document.querySelector(".create-quizz-img").value;
     const numberQuestions = parseInt(document.querySelector(".create-quizz-questions").value);
-    numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
+    const numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
     let erro = 0;
 
     if(title.length < 20 || title.length > 65){
@@ -362,7 +360,7 @@ function LoadQuizz(post) {
     </div>
     `;
 
-    numberQuestions += quizz.questions.length;
+    numberOfQuestions += quizz.questions.length;
     //Perguntas do quizz (para cada pergunta...)
     quizz.questions.forEach(element => {
         const answers = element.answers;
@@ -417,6 +415,7 @@ function AnswerCheck(bool, element) {
 }
 
 function loadResult(){ /*Função para popular o resultado!*/
+    const quizzResultContainer = document.querySelector(".quizz-result");
     quizzResultContainer.innerHTML = "";
     quizzResultContainer.innerHTML += `
     <div class="quizz-result-title"><strong>${hitsCalculator()}% de acerto: Você é praticamente um aluno de Hogwarts!</strong></div>
