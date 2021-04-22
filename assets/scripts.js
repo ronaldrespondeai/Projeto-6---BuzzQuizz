@@ -421,21 +421,25 @@ function AnswerCheck(bool, element) {
 function loadResult(){ /*Função para popular o resultado!*/
     const hits = hitsCalculator();
     let levelText = '';
+    let levelTitle = '';
+    let levelImage = '';
     let actualLevel = 0;
     const levels = loadedQuizz.levels;
     levels.forEach(element => {
         if (hits >= element.minValue && element.minValue > actualLevel) {
             levelText = element.text;
+            levelTitle = element.title;
+            levelImage = element.image;
             actualLevel = element.minValue;
             console.log(levelText);
         };
     });
     quizzResultContainer.innerHTML = "";
     quizzResultContainer.innerHTML += `
-    <div class="quizz-result-title"><strong>${hits}% de acerto: ${levelText}</strong></div>
+    <div class="quizz-result-title"><strong>${hits}% de acerto: ${levelTitle}</strong></div>
     <div class="quizz-result-content">
-        <img src="lalala.png" alt="">
-        <div><strong>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</strong></div>
+        <img src="${levelImage}" alt="">
+        <div><strong>${levelText}</strong></div>
     </div>
     `
 }
