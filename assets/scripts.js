@@ -246,9 +246,8 @@ function createLevels(){
     }
 }
 
-function goHome(element){
-    toggleHidden(homePage);
-    toggleHidden(element.parentNode);
+function goHome(){
+    window.location.reload();
 }
 
 function sendCreatedQuizz(){
@@ -263,10 +262,10 @@ function sendCreatedQuizz(){
 
     sendQuizz.then(sendSucess);
     sendQuizz.catch(sendError);
-    RequireQuizzes(); //Recarregar lista de quizzes ao criar um quizz novo.
 }
 
 function sendSucess(letter){ //coletando id do post para o localStorage
+    RequireQuizzes(); //Recarregar lista de quizzes ao criar um quizz novo.
     alert("Seu quizz foi enviado com sucesso!");
     const id = letter.data.id
 
@@ -418,8 +417,9 @@ function GetUserIds() {
     let Ids = [];
     if (localStorage.getItem('userIds') !== null) {
         Ids = localStorage.getItem('userIds');
+        return Ids;
     }
-    return Ids;
+    return "";
 }
 
 function CheckUserIds(obj) {
