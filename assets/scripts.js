@@ -116,10 +116,10 @@ function createQuestions(){
     questions = [];
     let erros = 0;
 
-    for(let i = 0; i<questionsAll.length; i++){
+    questionsAll.forEach(element => {
 
-        const title = questionsAll[i].querySelector(".create-quizz-question").value;
-        const color = questionsAll[i].querySelector(".create-quizz-background").value
+        const title = element.querySelector(".create-quizz-question").value;
+        const color = element.querySelector(".create-quizz-background").value
 
         if( title.length < 20 || !validColor(color)){
             alert(`Por favor, insira um texto maior e/ou uma cor válida na pergunta ${i+1}!`);
@@ -128,10 +128,10 @@ function createQuestions(){
 
         let answersArray = [];
 
-        const correctAnswer = questionsAll[i].querySelector(".create-quizz-answer").value;
-        const correctImg = questionsAll[i].querySelector(".create-quizz-answerimg").value;
-        const answersWrong = questionsAll[i].querySelectorAll(".create-quizz-wronganswer");
-        const answersWrongImg = questionsAll[i].querySelectorAll(".create-quizz-wronganswerimg");
+        const correctAnswer = element.querySelector(".create-quizz-answer").value;
+        const correctImg = element.querySelector(".create-quizz-answerimg").value;
+        const answersWrong = element.querySelectorAll(".create-quizz-wronganswer");
+        const answersWrongImg = element.querySelectorAll(".create-quizz-wronganswerimg");
 
         if(correctAnswer === null || !validURL(correctImg)){
             alert(`Por favor, insira uma resposta correta (texto e URL da imagem) na pergunta ${i+1}!`);
@@ -157,12 +157,11 @@ function createQuestions(){
             erros++;
         }
 
-        questions[i] = { 
-        title: title,  
-        color: color,
-        answers: answersArray}
-
-    }
+        questions.push({ 
+            title: title,  
+            color: color,
+            answers: answersArray})
+    });
 
     if(erros === 0){
         toggleHidden(quizzQuestionsScreen);
@@ -188,22 +187,22 @@ function createLevelsScreen(numberLevels){
 
 function validLevel(title,minValue,image,text,i,erros){
     if(title.length < 10){
-        alert(`O título do nível ${i+1} precisa ter ao menos 10 caracteres!`);
+        alert(`O título do nível ${i} precisa ter ao menos 10 caracteres!`);
         erros++;
     }
 
     if(minValue > 100){
-        alert(`O valor mínimo do nível ${i+1} precisa estar entre 0 e 100`);
+        alert(`O valor mínimo do nível ${i} precisa estar entre 0 e 100`);
         erros++;
     }
     
     if(!validURL(image)){
-        alert(`Insira um link válido para a imagem do nível ${i+1}!`);
+        alert(`Insira um link válido para a imagem do nível ${i}!`);
         erros++;
     }
 
     if(text < 30){
-        alert(`O texto do nível ${i+1} precisa ter ao menos 30 caracteres!`);
+        alert(`O texto do nível ${i} precisa ter ao menos 30 caracteres!`);
         erros++;
     }
 
@@ -216,23 +215,24 @@ function createLevels(){
     levels = [];
     let erros = 0;
     let auxLevel = 1;
-    for(let i = 0; i<levelsAll.length; i++){
+    let i = 1;
+    levelsAll.forEach(element => {
 
-        const title = levelsAll[i].querySelector(".create-quizz-level-title").value;
-        const image = levelsAll[i].querySelector(".create-quizz-level-img").value;
-        const text = levelsAll[i].querySelector(".create-quizz-level-description").value;
-        const minValue = parseInt(levelsAll[i].querySelector(".create-quizz-level-min").value);
+        const title = element.querySelector(".create-quizz-level-title").value;
+        const image = element.querySelector(".create-quizz-level-img").value;
+        const text = element.querySelector(".create-quizz-level-description").value;
+        const minValue = parseInt(element.querySelector(".create-quizz-level-min").value);
 
         erros += validLevel(title,minValue,image,text,i,erros);
         auxLevel *= minValue;
-
+        i++;
         levels.push({
             title: title,
             image: image,
             text: text,
             minValue: minValue
         })
-    }
+    })
 
     if(auxLevel !== 0){
         alert("Pelo menos um nível precisa começar em 0!");
@@ -260,11 +260,11 @@ function sendCreatedQuizz(){
 
     const sendQuizz = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes", createdQuizz);
 
-    sendQuizz.then(sendSucess);
-    sendQuizz.catch(sendError);
+    sendQuizz.then(sendQuizzSucess);
+    sendQuizz.catch(sendQuizzError);
 }
 
-function sendSucess(letter){ //coletando id do post para o localStorage
+function sendQuizzSucess(letter){ //coletando id do post para o localStorage
     RequireQuizzes(); //Recarregar lista de quizzes ao criar um quizz novo.
     alert("Seu quizz foi enviado com sucesso!");
     const id = letter.data.id
@@ -276,7 +276,7 @@ function sendSucess(letter){ //coletando id do post para o localStorage
     accessQuizz.setAttribute('onclick', `RequireQuizz(${id})`); 
 }
 
-function sendError(){
+function sendQuizzError(){
     alert("Houve um problema na criação do seu quizz :(");
 }
 
