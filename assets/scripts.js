@@ -119,7 +119,7 @@ function createQuestions(){
     const questionsAll = questionsContainer.querySelectorAll(".forms-container");
     questions = [];
     let erros = 0;
-
+    let i = 0;
     questionsAll.forEach(element => {
 
         const title = element.querySelector(".create-quizz-question").value;
@@ -160,6 +160,8 @@ function createQuestions(){
             alert(`Por favor, insira ao menos uma resposta errada (texto e URL da imagem) na pergunta ${i+1}!`);
             erros++;
         }
+
+        i++;
 
         questions.push({ 
             title: title,  
@@ -402,6 +404,7 @@ function AnswerCheck(bool, element) {
         answered++;
         if(bool){correctAnswers++;}
     }
+    
     const actual = element.parentNode;
     actual.classList.add("answered");
 
