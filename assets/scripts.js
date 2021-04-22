@@ -337,7 +337,7 @@ function RequireQuizz(id) {
 }
 
 function LoadQuizz(post) {
-    const screen34 = document.querySelector('.screen34');
+    const screen34 = document.querySelector('.screen-34');
     screen34.classList.add('hidden');
 
     const home = document.querySelector('.home');
