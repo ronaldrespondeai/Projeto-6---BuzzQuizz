@@ -444,6 +444,10 @@ input::placeholder{
     }
 
     /*Selected Quizz*/
+    .selected-quizz-title {
+        height: 227px;
+    }
+
     .selected-quizz-title span {
         font-size: 39px;
         line-height: 45px;
