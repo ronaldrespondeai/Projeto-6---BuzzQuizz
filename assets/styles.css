@@ -353,7 +353,7 @@ input::placeholder{
 .quizz-result{
     background-color: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-    width: 340px;
+    width: 375px;
     padding: 18px;
     display: flex;
     flex-direction: column;

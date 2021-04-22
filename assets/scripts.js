@@ -5,7 +5,7 @@ const quizzFinalScreen = document.querySelector(".quizz-final-screen");
 const questionsContainer = document.querySelector(".quizz-questions-screen div:first-of-type");
 const levelsContainer = document.querySelector(".quizz-levels-screen div:first-of-type");
 const homePage = document.querySelector(".home");
-const quizzResult = document.querySelector(".quizz-result");
+const quizzResult = document.querySelectorAll(".result");
 let title;
 let imgUrl;
 let questions;
@@ -405,6 +405,9 @@ function AnswerCheck(bool, element) {
     actual.classList.add("answered");
 
     if(answered === numberQuestions){
+        toggleHidden(quizzResult[0]);
+        toggleHidden(quizzResult[1]);
+        toggleHidden(quizzResult[2]);
         setTimeout(scrollQuizzResult,2000);
     }else{
         setTimeout(scrollNextQuestion,2000,actual);
