@@ -287,7 +287,7 @@ function sendQuizzError(){
 }
 
 
-// Quizz Loading                        //localStorage.setItem('userIds', [user ids])
+// Quizz Loading
 RequireQuizzes();
 
 function RequireQuizzes() {
@@ -362,7 +362,7 @@ function LoadQuizz(post) {
     </div>
     `;
 
-    numberQuestions += quizz.questions.length;
+    numberQuestions = quizz.questions.length;
     //Perguntas do quizz (para cada pergunta...)
     quizz.questions.forEach(element => {
         const answers = element.answers;
@@ -384,7 +384,7 @@ function LoadQuizz(post) {
                     <p>${element.text}</p>
                 </div>
             `;
-        })
+        });
     });
 }
 
@@ -417,14 +417,23 @@ function AnswerCheck(bool, element) {
 }
 
 function loadResult(){ /*Função para popular o resultado!*/
-    quizzResultContainer.innerHTML = "";
+    const acertos = hitsCalculator();
+    quizzResultContainer.innerHTML = '';
     quizzResultContainer.innerHTML += `
-    <div class="quizz-result-title"><strong>${hitsCalculator()}% de acerto: Você é praticamente um aluno de Hogwarts!</strong></div>
+    <div class="quizz-result-title"><strong>${hitsCalculator()}% de acerto: ${LevelCheck()}</strong></div>
     <div class="quizz-result-content">
         <img src="lalala.png" alt="">
-        <div><strong>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</strong></div>
+        <div><strong>${description}</strong></div>
     </div>
     `
+}
+
+function LevelCheck () {
+    //.forEach(element => {
+        if (hitsCalculator() >= element.levels.minValue) {
+            return `${element.levels.text}`
+        } 
+    //});
 }
 
 function hitsCalculator(){
@@ -459,30 +468,6 @@ function opacityEffect(element){
 
     element.classList.remove("opacity");
 }
-
-/*
-*******************formato loadquizz const quizz :
-id: 1,
-title: "Título do quizz",
-image: "https://http.cat/411.jpg",
-questions: [
-    {
-        title: "Título da pergunta 1",
-        color: "#123456",
-        answers: [
-            {
-                text: "Texto da resposta 1",
-                image: "https://http.cat/411.jpg",
-                isCorrectAnswer: true
-            },
-            {
-                text: "Texto da resposta 2",
-                image: "https://http.cat/412.jpg",
-                isCorrectAnswer: false
-            }
-        ]
-    },
-*/
 
 function Shuffle() {
     return (Math.random() - 0.5);
