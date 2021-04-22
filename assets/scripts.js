@@ -6,6 +6,7 @@ const questionsContainer = document.querySelector(".quizz-questions-screen div:f
 const levelsContainer = document.querySelector(".quizz-levels-screen div:first-of-type");
 const homePage = document.querySelector(".home");
 const quizzResult = document.querySelectorAll(".result");
+const quizzResultContainer = document.querySelector(".quizz-result");
 let title;
 let imgUrl;
 let questions;
@@ -405,13 +406,26 @@ function AnswerCheck(bool, element) {
     actual.classList.add("answered");
 
     if(answered === numberQuestions){
-        toggleHidden(quizzResult[0]);
-        toggleHidden(quizzResult[1]);
-        toggleHidden(quizzResult[2]);
+        loadResult();
         setTimeout(scrollQuizzResult,2000);
     }else{
         setTimeout(scrollNextQuestion,2000,actual);
     }
+}
+
+function loadResult(){ /*Função para popular o resultado!*/
+    quizzResultContainer.innerHTML = "";
+    quizzResultContainer.innerHTML += `
+    <div class="quizz-result-title"><strong>${hitsCalculator()}% de acerto: Você é praticamente um aluno de Hogwarts!</strong></div>
+    <div class="quizz-result-content">
+        <img src="lalala.png" alt="">
+        <div><strong>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</strong></div>
+    </div>
+    `
+}
+
+function hitsCalculator(){
+    return Math.floor(100*correctAnswers/answered)
 }
 
 function scrollNextQuestion(actual){
@@ -420,7 +434,8 @@ function scrollNextQuestion(actual){
 }
 
 function scrollQuizzResult(){
-    quizzResult.scrollIntoView();
+    quizzResult.forEach(element => toggleHidden(element));
+    quizzResult[0].scrollIntoView();
 }
 
 function textEffect(element){
