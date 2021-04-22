@@ -398,6 +398,11 @@ function AnswerCheck(bool, element) {
     }
     const actual = element.parentNode;
     actual.classList.add("answered");
+    
+    setTimeout(scrollNextQuestion,2000,actual);
+}
+
+function scrollNextQuestion(actual){
     const nextQuestion = actual.nextSibling.nextSibling;
     nextQuestion.scrollIntoView();
 }
@@ -420,6 +425,7 @@ function opacityEffect(element){
 
     element.classList.remove("opacity");
 }
+
 /*
 *******************formato loadquizz const quizz :
 id: 1,
