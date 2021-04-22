@@ -1,9 +1,9 @@
-const screen31 = document.querySelector(".screen-31");
-const screen32 = document.querySelector(".screen-32");
-const screen33 = document.querySelector(".screen-33");
-const screen34 = document.querySelector(".screen-34");
-const questionsContainer = document.querySelector(".screen-32 div:first-of-type");
-const levelsContainer = document.querySelector(".screen-33 div:first-of-type");
+const quizzBasicsScreen = document.querySelector(".quizz-basics-screen");
+const quizzQuestionsScreen = document.querySelector(".quizz-questions-screen");
+const quizzLevelsScreen = document.querySelector(".quizz-levels-screen");
+const quizzFinalScreen = document.querySelector(".quizz-final-screen");
+const questionsContainer = document.querySelector(".quizz-questions-screen div:first-of-type");
+const levelsContainer = document.querySelector(".quizz-levels-screen div:first-of-type");
 const homePage = document.querySelector(".home");
 let title;
 let imgUrl;
@@ -48,10 +48,10 @@ function validColor(str) {
 
 function createQuizzStart(){
     toggleHidden(homePage);
-    toggleHidden(screen31);
+    toggleHidden(quizzBasicsScreen);
 }
 
-screen31.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuizz()}});
+quizzBasicsScreen.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuizz()}});
 
 function createQuizz(){
     title = document.querySelector(".create-quizz-title").value;
@@ -82,8 +82,8 @@ function createQuizz(){
     if(erro === 0){
         createQuestionsScreen(numberQuestions);
         createLevelsScreen(numberLevels);
-        toggleHidden(screen31);
-        toggleHidden(screen32);
+        toggleHidden(quizzBasicsScreen);
+        toggleHidden(quizzQuestionsScreen);
     }
 }
 
@@ -110,7 +110,7 @@ function createQuestionsScreen(numberQuestions){
     }
 }
 
-screen32.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuestions()}});
+quizzQuestionsScreen.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuestions()}});
 function createQuestions(){
     const questionsAll = questionsContainer.querySelectorAll(".forms-container");
     questions = [];
@@ -165,8 +165,8 @@ function createQuestions(){
     }
 
     if(erros === 0){
-        toggleHidden(screen32);
-        toggleHidden(screen33);
+        toggleHidden(quizzQuestionsScreen);
+        toggleHidden(quizzLevelsScreen);
     }
 
 }
@@ -210,7 +210,7 @@ function validLevel(title,minValue,image,text,i,erros){
     return erros
 }
 
-screen33.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createLevels()}});
+quizzLevelsScreen.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createLevels()}});
 function createLevels(){
     const levelsAll = levelsContainer.querySelectorAll(".forms-container");
     levels = [];
@@ -240,8 +240,8 @@ function createLevels(){
     }
 
     if(erros === 0){
-        toggleHidden(screen33);
-        toggleHidden(screen34);
+        toggleHidden(quizzLevelsScreen);
+        toggleHidden(quizzFinalScreen);
         sendCreatedQuizz();
     }
 }
@@ -336,8 +336,8 @@ function RequireQuizz(id) {
 }
 
 function LoadQuizz(post) {
-    const screen34 = document.querySelector('.screen-34');
-    screen34.classList.add('hidden');
+    const quizzFinalScreen = document.querySelector('.quizz-final-screen');
+    quizzFinalScreen.classList.add('hidden');
 
     const home = document.querySelector('.home');
     home.classList.add('hidden');

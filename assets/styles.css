@@ -137,40 +137,40 @@ input::placeholder{
     color: #FFF5F4;
 }
 
-.screen-31 input{
+.quizz-basics-screen input{
     margin-bottom: 9px;
 }
 
-.screen-31 .forms-container{
+.quizz-basics-screen .forms-container{
     padding-top: 21px;
     padding-bottom: 24px;
 }
 
-.screen-32 div:first-of-type, .screen-33 div:first-of-type{
+.quizz-questions-screen div:first-of-type, .quizz-levels-screen div:first-of-type{
     width: 100%;
 }
 
-.screen-33 .forms-container input:last-of-type{
+.quizz-levels-screen .forms-container input:last-of-type{
     height: 177px;
 }
 
-.screen-33 .forms-container{
+.quizz-levels-screen .forms-container{
     padding-bottom: 20px;
 }
 
-.screen-34 img{
+.quizz-final-screen img{
     width:340px; 
     height:181px;
     margin: 29px auto 24px auto;
     border-radius: 5px;
 }
 
-.screen-34 button{
+.quizz-final-screen button{
     width: 220px;
     height: 44px;
 }
 
-.screen-34 button:last-of-type{
+.quizz-final-screen button:last-of-type{
     margin-top: 9px;
     background-color: transparent;
     border: none;
