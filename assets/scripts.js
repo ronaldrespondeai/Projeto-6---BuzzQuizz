@@ -11,8 +11,7 @@ let questions;
 let levels;
 let numberLevels=0;
 
-const userIds = [1, 2]; //GetUserIds(); //para o localStorage.(set/get)Item
-//console.log(userIds);
+const userIds = GetUserIds().split(","); //para o localStorage.(set/get)Item
 
 function toggleHidden(element){
     element.classList.toggle("hidden");
@@ -264,10 +263,18 @@ function sendCreatedQuizz(){
 
     sendQuizz.then(sendSucess);
     sendQuizz.catch(sendError);
+    RequireQuizzes(); //Recarregar lista de quizzes ao criar um quizz novo.
 }
 
-function sendSucess(){
+function sendSucess(letter){ //coletando id do post para o localStorage
     alert("Seu quizz foi enviado com sucesso!");
+    const id = letter.data.id
+
+    userIds.push(id);
+    localStorage.setItem('userIds', userIds.toString());
+
+    const accessQuizz = document.querySelector('.access');
+    accessQuizz.setAttribute('onclick', `RequireQuizz(${id})`); 
 }
 
 function sendError(){
@@ -293,7 +300,6 @@ function LoadQuizzes(post) {
     const quizzes = post.data;
     const userQuizzes = quizzes.filter(CheckUserIds); //apenas os que tem id contido em userIds
     const allQuizzes = quizzes.filter(UnCheckUserIds); //todos que não tem id contido em userIds
-    console.log(allQuizzes);
     
     userQuizzes.forEach(element => {
         ulUserQuizzes.innerHTML += `
@@ -331,6 +337,9 @@ function RequireQuizz(id) {
 }
 
 function LoadQuizz(post) {
+    const screen34 = document.querySelector('.screen34');
+    screen34.classList.add('hidden');
+
     const home = document.querySelector('.home');
     home.classList.add('hidden');
 
