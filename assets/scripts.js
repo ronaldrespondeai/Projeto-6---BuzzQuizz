@@ -10,7 +10,7 @@ let imgUrl;
 let questions;
 let levels;
 let numberLevels=0;
-
+let correctAnswers=0;
 const userIds = GetUserIds().split(","); //para o localStorage.(set/get)Item
 
 function toggleHidden(element){
@@ -372,7 +372,7 @@ function LoadQuizz(post) {
         //Respostas
         answers.forEach(element => {
             question.innerHTML += `
-                <div onclick="AnswerCheck(${element.isCorrectAnswer},this)">
+                <div class="${checkColor(element)} unselected" onclick="AnswerCheck(${element.isCorrectAnswer} ,this)">
                     <img src="${element.image}" alt="">
                     <p>${element.text}</p>
                 </div>
@@ -381,18 +381,43 @@ function LoadQuizz(post) {
     });
 }
 
+function checkColor(element){
+    if(element.isCorrectAnswer){
+        return "correct-answer";
+    }else{
+        return "incorrect-answer";
+    }
+}
+
 function AnswerCheck(bool, element) {
+
+
+    if(element.parentNode.classList.length === 1){
+        opacityEffect(element);
+        textEffect(element);
+        if(bool){correctAnswers++;}
+    }
+    
+    element.parentNode.classList.add("answered");
+}
+
+function textEffect(element){
+
     const childrens = element.parentNode.children;
 
-    if(element.parentNode.classList.length === 2){
-        return
-    }else{
-        for(let i = 1; i<childrens.length; i++){
-            childrens[i].classList.add("opacity");
-        }
-        element.classList.remove("opacity");
+    for(let i = 1; i<childrens.length; i++){
+        childrens[i].classList.remove("unselected");
     }
-    element.parentNode.classList.add("answered");
+}
+
+function opacityEffect(element){
+    const childrens = element.parentNode.children;
+
+    for(let i = 1; i<childrens.length; i++){
+        childrens[i].classList.add("opacity");
+    }
+
+    element.classList.remove("opacity");
 }
 /*
 *******************formato loadquizz const quizz :

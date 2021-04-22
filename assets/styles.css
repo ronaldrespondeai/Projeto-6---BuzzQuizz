@@ -334,6 +334,10 @@ input::placeholder{
     color: #FF4B4B;
 }
 
+.unselected{
+    color: black;
+}
+
 .opacity{
     opacity: 0.3;
 }
