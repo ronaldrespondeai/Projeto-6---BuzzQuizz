@@ -391,14 +391,15 @@ function checkColor(element){
 
 function AnswerCheck(bool, element) {
 
-
     if(element.parentNode.classList.length === 1){
         opacityEffect(element);
         textEffect(element);
         if(bool){correctAnswers++;}
     }
-    
-    element.parentNode.classList.add("answered");
+    const actual = element.parentNode;
+    actual.classList.add("answered");
+    const nextQuestion = actual.nextSibling.nextSibling;
+    nextQuestion.scrollIntoView();
 }
 
 function textEffect(element){
