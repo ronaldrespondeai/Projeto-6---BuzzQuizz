@@ -321,8 +321,23 @@ input::placeholder{
     font-weight: bold;
     line-height: 15px;
 }
+
 /*Selected Quizz*/
 
+/*Selected Answers*/
+
+.correct-answer{
+    color: #009C22;
+}
+
+.incorrect-answer{
+    color: #FF4B4B;
+}
+
+.opacity{
+    opacity: 0.3;
+}
+/*Selected Answers*/
 
 /* fiz o mobile e dps adicionei as alterações para desktop */
 

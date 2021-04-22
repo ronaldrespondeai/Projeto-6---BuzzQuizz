@@ -363,7 +363,7 @@ function LoadQuizz(post) {
         //Titulo da pergunta
         quizzPage.innerHTML += `
         <div class="selected-quizz-box">
-            <div class="question" style="background-color: ${element.color};">
+            <div class="question" style="background-color: ${element.color}; color: white;">
                 <strong>${element.title}</strong>
             </div>
         </div>
@@ -372,7 +372,7 @@ function LoadQuizz(post) {
         //Respostas
         answers.forEach(element => {
             question.innerHTML += `
-                <div onclick="AnswerCheck(${element.isCorrectAnswer})">
+                <div onclick="AnswerCheck(${element.isCorrectAnswer},this)">
                     <img src="${element.image}" alt="">
                     <p>${element.text}</p>
                 </div>
@@ -381,8 +381,18 @@ function LoadQuizz(post) {
     });
 }
 
-function AnswerCheck(bool) {
+function AnswerCheck(bool, element) {
+    const childrens = element.parentNode.children;
 
+    if(element.parentNode.classList.length === 2){
+        return
+    }else{
+        for(let i = 1; i<childrens.length; i++){
+            childrens[i].classList.add("opacity");
+        }
+        element.classList.remove("opacity");
+    }
+    element.parentNode.classList.add("answered");
 }
 /*
 *******************formato loadquizz const quizz :
