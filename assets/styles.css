@@ -15,7 +15,7 @@ body {
 
 .top-bar{
     background-color: #EC362D;
-    width: 100%;
+    width: 100vw;
     height: 69px;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@ body {
 /* pra deixar a barra do topo fixa mas não precisar ficar somando o tamanho dela na margem dos outros elementos */
 .top-bar-aux{
     height: 69px;
-    width: 100%;
+    width: 10vw;
 }
 
 .home{
@@ -351,14 +351,13 @@ input::placeholder{
 
 /*Quizz result*/
 .quizz-result{
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     width: 340px;
     padding: 18px;
-}
-
-.quizz-result img{
-    width: 340px;
-    height: 255px;
-    padding: 9px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .quizz-result-title{
@@ -371,16 +370,31 @@ input::placeholder{
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
-.quizz-result-text{
+.quizz-result img{
     width: 340px;
-    height: 96px;
+    height: 255px;
+    margin-bottom: 9px;
+}
+
+.quizz-result-content{
+    width: 340px;
     font-size: 17px;
     color: #484848;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: 9px;
+}
+
+.quizz-result-content div{
+    height: 96px;
+    width: 340px;
+    display: flex;
+    align-items: center;
 }
 
 .reset-quizz-button{
@@ -462,31 +476,45 @@ input::placeholder{
     /*Quizz result*/
     .quizz-result{
         width: 759px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-
+    
+    .quizz-result-title{
+        font-size: 23px;
+        width: 100%;
+        margin: 18px;
+    }
+    
     .quizz-result img{
         width: 364px;
         height: 273px;
+        margin-bottom: 0px;
+        margin-right: 21px;
     }
-
-    .quizz-result-title{
-        font-size: 23px;
-        width: 759px;
-        padding: 18px;
-    }
-
-    .quizz-result-text{
-        width: 328px;
-        height: 250px;
+    
+    .quizz-result-content{
+        width: 100%;
         font-size: 19px;
-        color: #484848;
-        align-items: flex-start;
-        margin-left: 21px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0px;
     }
-
+    
+    .quizz-result-content div{
+        height: 250px;
+        width: 328px;
+        display: flex;
+        align-items: flex-start;
+    }
+    
     .reset-quizz-button{
-        width: 260px;
-        height: 52px;
+        width: 220px;
+        height: 44px;
         font-size: 21px;
         margin: 57px 0 16px 0;
     }
