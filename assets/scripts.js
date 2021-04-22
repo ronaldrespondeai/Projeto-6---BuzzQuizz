@@ -6,14 +6,17 @@ const questionsContainer = document.querySelector(".quizz-questions-screen div:f
 const levelsContainer = document.querySelector(".quizz-levels-screen div:first-of-type");
 const homePage = document.querySelector(".home");
 const quizzResult = document.querySelectorAll(".result");
+const quizzResultContainer = document.querySelector(".quizz-result");
 let title;
 let imgUrl;
 let questions;
 let levels;
+let numberLevels=0;
 let correctAnswers=0;
 let answered=0;
 const userIds = GetUserIds().split(","); //para o localStorage.(set/get)Item
-let numberOfQuestions=0;
+let numberQuestions=0;
+let loadedQuizz;
 
 function toggleHidden(element){
     element.classList.toggle("hidden");
@@ -59,7 +62,7 @@ function createQuizz(){
     title = document.querySelector(".create-quizz-title").value;
     imgUrl = document.querySelector(".create-quizz-img").value;
     const numberQuestions = parseInt(document.querySelector(".create-quizz-questions").value);
-    const numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
+    numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
     let erro = 0;
 
     if(title.length < 20 || title.length > 65){
@@ -285,7 +288,7 @@ function sendQuizzError(){
 }
 
 
-// Quizz Loading                        //localStorage.setItem('userIds', [user ids])
+// Quizz Loading
 RequireQuizzes();
 
 function RequireQuizzes() {
@@ -340,6 +343,7 @@ function RequireQuizz(id) {
 }
 
 function LoadQuizz(post) {
+    loadedQuizz = post.data;
     const quizzFinalScreen = document.querySelector('.quizz-final-screen');
     quizzFinalScreen.classList.add('hidden');
 
@@ -360,7 +364,7 @@ function LoadQuizz(post) {
     </div>
     `;
 
-    numberOfQuestions += quizz.questions.length;
+    numberQuestions += quizz.questions.length;
     //Perguntas do quizz (para cada pergunta...)
     quizz.questions.forEach(element => {
         const answers = element.answers;
@@ -382,7 +386,7 @@ function LoadQuizz(post) {
                     <p>${element.text}</p>
                 </div>
             `;
-        })
+        });
     });
 }
 
@@ -415,10 +419,20 @@ function AnswerCheck(bool, element) {
 }
 
 function loadResult(){ /*Função para popular o resultado!*/
-    const quizzResultContainer = document.querySelector(".quizz-result");
+    const hits = hitsCalculator();
+    let levelText = '';
+    let actualLevel = 0;
+    const levels = loadedQuizz.levels;
+    levels.forEach(element => {
+        if (hits >= element.minValue && element.minValue > actualLevel) {
+            levelText = element.text;
+            actualLevel = element.minValue;
+            console.log(levelText);
+        };
+    });
     quizzResultContainer.innerHTML = "";
     quizzResultContainer.innerHTML += `
-    <div class="quizz-result-title"><strong>${hitsCalculator()}% de acerto: Você é praticamente um aluno de Hogwarts!</strong></div>
+    <div class="quizz-result-title"><strong>${hits}% de acerto: ${levelText}</strong></div>
     <div class="quizz-result-content">
         <img src="lalala.png" alt="">
         <div><strong>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</strong></div>
@@ -458,30 +472,6 @@ function opacityEffect(element){
 
     element.classList.remove("opacity");
 }
-
-/*
-*******************formato loadquizz const quizz :
-id: 1,
-title: "Título do quizz",
-image: "https://http.cat/411.jpg",
-questions: [
-    {
-        title: "Título da pergunta 1",
-        color: "#123456",
-        answers: [
-            {
-                text: "Texto da resposta 1",
-                image: "https://http.cat/411.jpg",
-                isCorrectAnswer: true
-            },
-            {
-                text: "Texto da resposta 2",
-                image: "https://http.cat/412.jpg",
-                isCorrectAnswer: false
-            }
-        ]
-    },
-*/
 
 function Shuffle() {
     return (Math.random() - 0.5);
