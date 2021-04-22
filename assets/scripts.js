@@ -5,13 +5,16 @@ const quizzFinalScreen = document.querySelector(".quizz-final-screen");
 const questionsContainer = document.querySelector(".quizz-questions-screen div:first-of-type");
 const levelsContainer = document.querySelector(".quizz-levels-screen div:first-of-type");
 const homePage = document.querySelector(".home");
+const quizzResult = document.querySelector(".quizz-result");
 let title;
 let imgUrl;
 let questions;
 let levels;
 let numberLevels=0;
 let correctAnswers=0;
+let answered=0;
 const userIds = GetUserIds().split(","); //para o localStorage.(set/get)Item
+let numberQuestions=0;
 
 function toggleHidden(element){
     element.classList.toggle("hidden");
@@ -356,6 +359,7 @@ function LoadQuizz(post) {
     </div>
     `;
 
+    numberQuestions += quizz.questions.length;
     //Perguntas do quizz (para cada pergunta...)
     quizz.questions.forEach(element => {
         const answers = element.answers;
@@ -394,17 +398,26 @@ function AnswerCheck(bool, element) {
     if(element.parentNode.classList.length === 1){
         opacityEffect(element);
         textEffect(element);
+        answered++;
         if(bool){correctAnswers++;}
     }
     const actual = element.parentNode;
     actual.classList.add("answered");
-    
-    setTimeout(scrollNextQuestion,2000,actual);
+
+    if(answered === numberQuestions){
+        setTimeout(scrollQuizzResult,2000);
+    }else{
+        setTimeout(scrollNextQuestion,2000,actual);
+    }
 }
 
 function scrollNextQuestion(actual){
     const nextQuestion = actual.nextSibling.nextSibling;
     nextQuestion.scrollIntoView();
+}
+
+function scrollQuizzResult(){
+    quizzResult.scrollIntoView();
 }
 
 function textEffect(element){

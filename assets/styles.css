@@ -161,24 +161,31 @@ input::placeholder{
 .quizz-final-screen img{
     width:340px; 
     height:181px;
-    margin: 29px auto 24px auto;
+    margin-top: 29px;
     border-radius: 5px;
 }
 
 .quizz-final-screen button{
     width: 220px;
     height: 44px;
+    margin: 24px auto 9px auto;
 }
 
-.quizz-final-screen button:last-of-type{
-    margin-top: 9px;
+.button-home{
     background-color: transparent;
     border: none;
     color: #818181;
     font-size: 18px;
+    margin: 0 auto;
 }
 
 /*Display Quizzes*/
+.quizz-result{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 .quizzes-title {
     width: 340px;
     display: flex;
@@ -325,7 +332,6 @@ input::placeholder{
 /*Selected Quizz*/
 
 /*Selected Answers*/
-
 .correct-answer{
     color: #009C22;
 }
@@ -343,6 +349,52 @@ input::placeholder{
 }
 /*Selected Answers*/
 
+/*Quizz result*/
+.quizz-result{
+    width: 340px;
+    padding: 18px;
+}
+
+.quizz-result img{
+    width: 340px;
+    height: 255px;
+    padding: 9px 0;
+}
+
+.quizz-result-title{
+    font-size: 19px;
+    width: 340px;
+    height: 99px;
+    padding: 16px;
+    background-color: #EC362D;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quizz-result-text{
+    width: 340px;
+    height: 96px;
+    font-size: 17px;
+    color: #484848;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reset-quizz-button{
+    width: 220px;
+    height: 44px;
+    background-color: #EC362D;
+    border-radius: 15px;
+    font-size: 18px;
+    border: none;
+    color: #FFF5F4;
+    padding: 7px;
+    margin: 34px 0 8px 0;
+}
+/*Quizz result */
 /* fiz o mobile e dps adicionei as alterações para desktop */
 
 @media (min-width: 1100px) {
@@ -407,6 +459,38 @@ input::placeholder{
     }
     /*Selected Quizz*/
 
+    /*Quizz result*/
+    .quizz-result{
+        width: 759px;
+    }
+
+    .quizz-result img{
+        width: 364px;
+        height: 273px;
+    }
+
+    .quizz-result-title{
+        font-size: 23px;
+        width: 759px;
+        padding: 18px;
+    }
+
+    .quizz-result-text{
+        width: 328px;
+        height: 250px;
+        font-size: 19px;
+        color: #484848;
+        align-items: flex-start;
+        margin-left: 21px;
+    }
+
+    .reset-quizz-button{
+        width: 260px;
+        height: 52px;
+        font-size: 21px;
+        margin: 57px 0 16px 0;
+    }
+    /*Quizz result */
 }
 
 .hidden{
