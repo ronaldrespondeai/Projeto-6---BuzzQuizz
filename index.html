@@ -35,13 +35,7 @@
 
         <!--Todos os quizzes-->
         <div class="quizzes-title">Todos os Quizzes</div>
-        <ul class="quizzes-box ul-all-quizzes">
-            <li class="quizz exemplo">
-                <img src="https://super.abril.com.br/wp-content/uploads/2018/07/566ee0ae82bee174ca0300dahomer-simpson.jpeg" alt="">
-                <div class="gradient"></div>
-                <p>Acerte os personagens corretos dos Simpsons e prove seu amor!</p>
-            </li>
-        </ul>
+        <ul class="quizzes-box ul-all-quizzes"></ul>
         <!--Todos os quizzes-->
     </div>
     <!--Home-->
@@ -83,44 +77,19 @@
     <!--Criação de quizz-->
 
     <!--Selected-Quizz!-->
-    <div class="selected-quizz-page hidden example">
-        <div class="selected-quizz-title">
-            <img src="https://super.abril.com.br/wp-content/uploads/2018/07/566ee0ae82bee174ca0300dahomer-simpson.jpeg" alt="">
-            <div class="gradient"></div>
-            <span>Quão Potterhead é você?</span>
-        </div>
-
-        <div class="selected-quizz-box">
-            <div class="question" style="background-color: aqua;"><strong>Em qual animal Olho-tonto Moody transfigurou Malfoy?</strong></div>
-            <div>
-                <img src="https://super.abril.com.br/wp-content/uploads/2018/07/566ee0ae82bee174ca0300dahomer-simpson.jpeg" alt="">
-                <p>Gatineo</p>
-            </div>
-            <div>
-                <img src="https://super.abril.com.br/wp-content/uploads/2018/07/566ee0ae82bee174ca0300dahomer-simpson.jpeg" alt="">
-                <p>Gatineo</p>
-            </div>
-            <div>
-                <img src="https://super.abril.com.br/wp-content/uploads/2018/07/566ee0ae82bee174ca0300dahomer-simpson.jpeg" alt="">
-                <p>Gatineo</p>
-            </div>
-            <div>
-                <img src="https://super.abril.com.br/wp-content/uploads/2018/07/566ee0ae82bee174ca0300dahomer-simpson.jpeg" alt="">
-                <p>Gatineo</p>
-            </div>
-        </div>
+    <div class="selected-quizz-page hidden">
     </div>
     <!--Selected-Quizz!-->
 
-    <div class="quizz-result result hidden">
+    <div class="quizz-result hidden">
         <div class="quizz-result-title"><strong>88% de acerto: Você é praticamente um aluno de Hogwarts!</strong></div>
         <div class="quizz-result-content">
             <img src="lalala.png" alt="">
             <div><strong>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</strong></div>
         </div>
+        <button type="submit" class="reset-quizz-button">Reiniciar Quizz</button>
+        <button class="button-home" type="submit" onclick="goHome()">Voltar pra home</button>
     </div>
-    <button type="submit" class="reset-quizz-button result hidden">Reiniciar Quizz</button>
-    <button class="button-home result hidden" type="submit" onclick="goHome()">Voltar pra home</button>
 
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

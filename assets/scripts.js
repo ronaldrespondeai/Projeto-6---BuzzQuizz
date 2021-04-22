@@ -5,8 +5,6 @@ const quizzFinalScreen = document.querySelector(".quizz-final-screen");
 const questionsContainer = document.querySelector(".quizz-questions-screen div:first-of-type");
 const levelsContainer = document.querySelector(".quizz-levels-screen div:first-of-type");
 const homePage = document.querySelector(".home");
-const quizzResult = document.querySelectorAll(".result");
-const quizzResultContainer = document.querySelector(".quizz-result");
 let title;
 let imgUrl;
 let questions;
@@ -333,6 +331,7 @@ function LoadQuizzes(post) {
         const divCreateQuizz = document.querySelector('.create-quizz');
         divCreateQuizz.classList.add('hidden');
     }
+    window.scrollTo(0,0);
 }
 
 function RequireQuizz(id) {
@@ -343,7 +342,7 @@ function RequireQuizz(id) {
 }
 
 function LoadQuizz(post) {
-    loadedQuizz = post.data;
+    loadedQuizz = post;
     const quizzFinalScreen = document.querySelector('.quizz-final-screen');
     quizzFinalScreen.classList.add('hidden');
 
@@ -354,6 +353,9 @@ function LoadQuizz(post) {
     quizzPage.classList.remove('hidden');
 
     const quizz = post.data;
+    numberQuestions = quizz.questions.length;
+    answered = 0;
+    correctAnswers = 0;
     
     // Titulo do quizz
     quizzPage.innerHTML = `
@@ -364,7 +366,6 @@ function LoadQuizz(post) {
     </div>
     `;
 
-    numberQuestions += quizz.questions.length;
     //Perguntas do quizz (para cada pergunta...)
     quizz.questions.forEach(element => {
         const answers = element.answers;
@@ -388,6 +389,9 @@ function LoadQuizz(post) {
             `;
         });
     });
+    const quizzResult = document.querySelector(".quizz-result");
+    quizzResult.classList.add('hidden');
+    window.scrollTo(0,0);
 }
 
 function checkColor(element){
@@ -400,12 +404,13 @@ function checkColor(element){
 
 function AnswerCheck(bool, element) {
 
-    if(element.parentNode.classList.length === 1){
-        opacityEffect(element);
-        textEffect(element);
-        answered++;
-        if(bool){correctAnswers++;}
-    }
+    //if(element.parentNode.classList.length === 1){
+    opacityEffect(element);
+    textEffect(element);
+    answered++;
+    if(bool){correctAnswers++;}
+    //}
+    element.setAttribute('onclick', '');
     
     const actual = element.parentNode;
     actual.classList.add("answered");
@@ -424,16 +429,16 @@ function loadResult(){ /*Função para popular o resultado!*/
     let levelTitle = '';
     let levelImage = '';
     let actualLevel = 0;
-    const levels = loadedQuizz.levels;
+    const levels = loadedQuizz.data.levels;
     levels.forEach(element => {
         if (hits >= element.minValue && element.minValue > actualLevel) {
             levelText = element.text;
             levelTitle = element.title;
             levelImage = element.image;
             actualLevel = element.minValue;
-            console.log(levelText);
         };
     });
+    const quizzResultContainer = document.querySelector(".quizz-result");
     quizzResultContainer.innerHTML = "";
     quizzResultContainer.innerHTML += `
     <div class="quizz-result-title"><strong>${hits}% de acerto: ${levelTitle}</strong></div>
@@ -441,6 +446,8 @@ function loadResult(){ /*Função para popular o resultado!*/
         <img src="${levelImage}" alt="">
         <div><strong>${levelText}</strong></div>
     </div>
+    <button type="submit" class="reset-quizz-button result" onclick="RequireQuizz(${loadedQuizz.data.id})">Reiniciar Quizz</button>
+    <button class="button-home result" type="submit" onclick="goHome()">Voltar pra home</button>
     `
 }
 
@@ -454,8 +461,9 @@ function scrollNextQuestion(actual){
 }
 
 function scrollQuizzResult(){
-    quizzResult.forEach(element => toggleHidden(element));
-    quizzResult[0].scrollIntoView();
+    const quizzResult = document.querySelector(".quizz-result");
+    quizzResult.classList.remove('hidden');
+    quizzResult.scrollIntoView();
 }
 
 function textEffect(element){
