@@ -59,30 +59,13 @@ function createQuizzStart(){
 quizzBasicsScreen.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuizz()}});
 
 function createQuizz(){
-    title = document.querySelector(".create-quizz-title").value;
-    imgUrl = document.querySelector(".create-quizz-img").value;
+    title = document.querySelector(".create-quizz-title");
+    imgUrl = document.querySelector(".create-quizz-img");
     const numberQuestions = parseInt(document.querySelector(".create-quizz-questions").value);
     numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
     let erro = 0;
 
-    if(title.length < 20 || title.length > 65){
-        alert("Título inválido, precisa possuir entre 20 e 65 caracteres");
-        erro++;
-    }
-    if(!validURL(imgUrl)){
-        alert("Por favor, insira uma imagem para seu quizz :)");
-        erro++;
-    }
-
-    if(numberQuestions < 3 || !!numberQuestions === !!NaN){
-        alert("Por favor, insira um número de perguntas maior que 2");
-        erro++;
-    }
-
-    if(numberLevels < 2 || !!numberLevels === !!NaN){
-        alert("Por favor, insira um número de níveis maior que 1");
-        erro++;
-    }
+    erro += validCreateQuizz(numberQuestions);
     
     if(erro === 0){
         createQuestionsScreen(numberQuestions);
@@ -90,6 +73,37 @@ function createQuizz(){
         toggleHidden(quizzBasicsScreen);
         toggleHidden(quizzQuestionsScreen);
     }
+}
+
+function validCreateQuizz(numberQuestions){
+    const numberQuestionsValid = document.querySelector(".create-quizz-questions");
+    const numberLevelsValid = document.querySelector(".create-quizz-levels");
+    let erro = 0;
+    title.nextSibling.nextSibling.classList.add("hidden");
+    numberQuestionsValid.nextSibling.nextSibling.classList.add("hidden");
+    numberLevelsValid.nextSibling.nextSibling.classList.add("hidden");
+    imgUrl.nextSibling.nextSibling.classList.add("hidden");
+    
+    if(title.value.length < 20 || title.value.length > 65){
+        title.nextSibling.nextSibling.classList.remove("hidden");
+        erro++;
+    }
+    if(!validURL(imgUrl.value)){
+        imgUrl.nextSibling.nextSibling.classList.remove("hidden");
+        erro++;
+    }
+
+    if(numberQuestions < 3 || !!numberQuestions === !!NaN){
+        numberQuestionsValid.nextSibling.nextSibling.classList.remove("hidden");
+        erro++;
+    }
+
+    if(numberLevels < 2 || !!numberLevels === !!NaN){
+        numberLevelsValid.nextSibling.nextSibling.classList.remove("hidden");
+        erro++;
+    }
+
+    return erro
 }
 
 function createQuestionsScreen(numberQuestions){
@@ -208,35 +222,38 @@ function createLevelsScreen(numberLevels){
         </div>
         <div class="collapsible-content hidden">
             <input class="create-quizz-level-title" required type="text" placeholder="Título do nível" minlength="10">
+            <span class="hidden">O título do nível precisa ter ao menos 10 caracteres!</span>
             <input class="create-quizz-level-min" required type="number" placeholder="% de acerto mínima" min="0" max="100">
+            <span>O valor mínimo do nível precisa estar entre 0 e 100</span>
             <input class="create-quizz-level-img" required type="url" placeholder="URL da imagem do nível">
+            <span>Insira um link válido para a imagem do nível!</span>
             <input class="create-quizz-level-description" required type="text" placeholder="Descrição do nível" minlength="30">
+            <span>O texto do nível precisa ter ao menos 30 caracteres!</span>
         </div>
     </div>
         `
     }
 }
 
-
-
-function validLevel(title,minValue,image,text,i,erros){
-    if(title.length < 10){
-        alert(`O título do nível ${i} precisa ter ao menos 10 caracteres!`);
+function validLevel(title,minValue,image,text,erros){
+    if(title.value.length < 10){
+        console.log(title.nextElementSibling.nextElementSibling);
+        title.nextElementSibling.nextElementSibling.classList.toggle("hidden");
         erros++;
     }
 
-    if(minValue > 100){
-        alert(`O valor mínimo do nível ${i} precisa estar entre 0 e 100`);
+    if(minValue.value > 100){
+        alert(`O valor mínimo do nível precisa estar entre 0 e 100`);
         erros++;
     }
     
-    if(!validURL(image)){
-        alert(`Insira um link válido para a imagem do nível ${i}!`);
+    if(!validURL(image.value)){
+        alert(`Insira um link válido para a imagem do nível!`);
         erros++;
     }
 
-    if(text < 30){
-        alert(`O texto do nível ${i} precisa ter ao menos 30 caracteres!`);
+    if(text.value < 30){
+        alert(`O texto do nível precisa ter ao menos 30 caracteres!`);
         erros++;
     }
 
@@ -249,22 +266,20 @@ function createLevels(){
     levels = [];
     let erros = 0;
     let auxLevel = 1;
-    let i = 1;
     levelsAll.forEach(element => {
 
-        const title = element.querySelector(".create-quizz-level-title").value;
-        const image = element.querySelector(".create-quizz-level-img").value;
-        const text = element.querySelector(".create-quizz-level-description").value;
-        const minValue = parseInt(element.querySelector(".create-quizz-level-min").value);
+        const title = element.querySelector(".create-quizz-level-title");
+        const image = element.querySelector(".create-quizz-level-img");
+        const text = element.querySelector(".create-quizz-level-description");
+        const minValue = parseInt(element.querySelector(".create-quizz-level-min"));
 
-        erros += validLevel(title,minValue,image,text,i,erros);
+        erros += validLevel(title,minValue,image,text,erros);
         auxLevel *= minValue;
-        i++;
         levels.push({
-            title: title,
-            image: image,
-            text: text,
-            minValue: minValue
+            title: title.value,
+            image: image.value,
+            text: text.value,
+            minValue: minValue.value
         })
     })
 
@@ -286,8 +301,8 @@ function goHome(){
 
 function sendCreatedQuizz(){
     const createdQuizz = {
-        title: title,
-        image: imgUrl,
+        title: title.value,
+        image: imgUrl.value,
         questions: questions,
         levels: levels
     }

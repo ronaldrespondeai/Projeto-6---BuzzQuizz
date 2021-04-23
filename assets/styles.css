@@ -103,7 +103,7 @@ input {
     height: 46px;
     border: 1px solid #D1D1D1;
     border-radius: 5px;
-    margin-bottom: 14px;
+    margin-bottom: 3px;
     padding: 13px;
 }
 
@@ -143,8 +143,10 @@ input::placeholder{
     color: #FFF5F4;
 }
 
-.quizz-basics-screen input{
+.forms-container span{
     margin-bottom: 9px;
+    color: #EC362D;
+    font-size: 16px;
 }
 
 .quizz-basics-screen input:last-of-type{

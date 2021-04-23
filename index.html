@@ -53,9 +53,13 @@
         <strong>Comece pelo começo</strong>
         <div class="forms-container">
             <input class="create-quizz-title" required type="text" placeholder="Título do seu quizz" minlength="20" maxlength="65">
+            <span class="hidden">Título inválido, precisa possuir entre 20 e 65 caracteres</span>
             <input class="create-quizz-img" required type="url" placeholder="URL da imagem do seu quizz">
+            <span class="hidden">Por favor, insira uma imagem para seu quizz :)</span>
             <input class="create-quizz-questions" required type="number" min="3" placeholder="Quantidade de perguntas do quizz">
+            <span class="hidden">Por favor, insira um número de perguntas maior que 2</span>
             <input class="create-quizz-levels" required type="number" min="2" placeholder="Quantidade de níveis do quizz">
+            <span class="hidden">Por favor, insira um número de níveis maior que 1</span>
         </div>
         <button type="submit" class="create-quizz-buttons" onclick="createQuizz()">Prosseguir pra criar perguntas</button>
     </div>
