@@ -16,7 +16,6 @@ let answered=0;
 const userIds = GetUserIds().split(","); //para o localStorage.(set/get)Item
 let numberOfQuestions=0;
 let loadedQuizz;
-const secretKey = {header:"Secret-Key"}; // não consegui!
 
 function toggleHidden(element){
     element.classList.toggle("hidden");
@@ -296,13 +295,25 @@ function sendCreatedQuizz(){
 function sendQuizzSucess(letter){ //coletando id do post para o localStorage
     RequireQuizzes(); //Recarregar lista de quizzes ao criar um quizz novo.
     alert("Seu quizz foi enviado com sucesso!");
-    const id = letter.data.id
+    const id = letter.data.id;
 
     userIds.push(id);
     localStorage.setItem('userIds', userIds.toString());
 
+    const key = letter.data.key; // tentativa de apagar o quizz logo após criar ele
+    deleteQuizz(id, key)
     const accessQuizz = document.querySelector('.access');
     accessQuizz.setAttribute('onclick', `RequireQuizz(${id})`); 
+}
+
+function deleteQuizz(id, keyToken){
+    if(window.confirm("Realmente deseja apagar esse seu quizz?")){
+        const secretKey = {headers: {Authorization: keyToken}}
+        const require = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes/${id}`, secretKey);
+        // NÃO CONSEGUI FAZER
+        require.then( (response) => console.log(response));
+        require.catch( (response) => console.log(response));
+    }
 }
 
 function sendQuizzError(){
@@ -360,15 +371,6 @@ function LoadQuizzes(post) {
         divCreateQuizz.classList.add('hidden');
     }
     window.scrollTo(0,0);
-}
-
-function deleteQuizz(id){
-    if(window.confirm("Realmente deseja apagar esse seu quizz?")){
-        const require = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes/${id}`, secretKey);
-        // NÃO CONSEGUI FAZER
-        require.then( (response) => console.log(response));
-        require.catch( (response) => console.log(response));
-    }
 }
 
 function RequireQuizz(id) {
