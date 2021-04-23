@@ -7,6 +7,7 @@ const levelsContainer = document.querySelector(".quizz-levels-screen div:first-o
 const homePage = document.querySelector(".home");
 const quizzResult = document.querySelector(".quizz-result-container");
 const loadingScreen = document.querySelector(".loading-screen");
+const allInputs = document.querySelectorAll("input");
 let title;
 let imgUrl;
 let questions;
@@ -57,6 +58,12 @@ function validColor(str) {
 }
 
 function createQuizzStart(){
+    
+    if(editingQuizz === false){
+        allInputs.forEach(element => element.value = "");
+    }else{
+        
+    }
     toggleHidden(homePage);
     toggleHidden(quizzBasicsScreen);
 }
