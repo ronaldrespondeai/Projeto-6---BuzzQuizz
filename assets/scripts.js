@@ -390,8 +390,6 @@ function sendQuizzSucess(letter){ //coletando id do post para o localStorage
     userKeys.push(key);
     localStorage.setItem('userKeys', userKeys.toString());
 
-    //deleteQuizz(id) //tentativa de apagar logo após enviar
-
     const accessQuizz = document.querySelector('.access');
     accessQuizz.setAttribute('onclick', `RequireQuizz(${id})`); 
 }
@@ -411,7 +409,7 @@ function deleteQuizz(id){
         userKeys.splice(index, 1);
         localStorage.setItem('userKeys', userKeys.toString());
 
-        RequireQuizzes();
+        window.location.reload();
     }
 }
 
