@@ -8,11 +8,11 @@ const homePage = document.querySelector(".home");
 const quizzResult = document.querySelector(".quizz-result-container");
 const loadingScreen = document.querySelector(".loading-screen");
 const allInputs = document.querySelectorAll("input");
-let title;
-let imgUrl;
+const title = document.querySelector(".create-quizz-title");
+const imgUrl = document.querySelector(".create-quizz-img");
+const numberLevels = document.querySelector(".create-quizz-levels");
 let questions;
 let levels;
-let numberLevels=0;
 let correctAnswers=0;
 let answered=0;
 const userIds = GetUserIds().split(",");
@@ -22,6 +22,7 @@ let loadedQuizz;
 let editingQuizz = false;
 let editId = "";
 let editKey = "";
+let editingElement = "";
 //GetUserLocal();
 
 function toggleHidden(element){
@@ -59,11 +60,16 @@ function validColor(str) {
 
 function createQuizzStart(){
     
-    if(editingQuizz === false){
-        allInputs.forEach(element => element.value = "");
-    }else{
-        
+    allInputs.forEach(element => element.value = "");
+
+    if(editingQuizz === true){
+        title.value += editingElement.title;
+        imgUrl.value += editingElement.image;
+        const numberQuestionsInput = document.querySelector(".create-quizz-questions");
+        numberQuestionsInput.value += editingElement.questions.length;
+        numberLevels.value += editingElement.levels.length;
     }
+
     toggleHidden(homePage);
     toggleHidden(quizzBasicsScreen);
 }
@@ -71,17 +77,15 @@ function createQuizzStart(){
 quizzBasicsScreen.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createQuizz()}});
 
 function createQuizz(){
-    title = document.querySelector(".create-quizz-title");
-    imgUrl = document.querySelector(".create-quizz-img");
-    const numberQuestions = parseInt(document.querySelector(".create-quizz-questions").value);
-    numberLevels = parseInt(document.querySelector(".create-quizz-levels").value);
+    const numberQuestionsInput = document.querySelector(".create-quizz-questions");
+    const numberQuestions = parseInt(numberQuestionsInput.value);
     let erro = 0;
 
     erro += validCreateQuizz(numberQuestions);
     
     if(erro === 0){
         createQuestionsScreen(numberQuestions);
-        createLevelsScreen(numberLevels);
+        createLevelsScreen(parseInt(numberLevels.value));
         toggleHidden(quizzBasicsScreen);
         toggleHidden(quizzQuestionsScreen);
     }
@@ -110,7 +114,7 @@ function validCreateQuizz(numberQuestions){
         erro++;
     }
 
-    if(numberLevels < 2 || !!numberLevels === !!NaN){
+    if(numberLevels.value < 2 || !!numberLevels.value === !!NaN){
         numberLevelsValid.nextSibling.nextSibling.classList.remove("hidden");
         erro++;
     }
@@ -384,6 +388,13 @@ function editQuizz(id){
     editId = id;
     editKey = key;
     editingQuizz = true;
+    const promise = axios.get(`https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes/${id}`);
+    promise.then(getEditingElement)
+}
+
+function getEditingElement(letter){
+    editingElement = letter.data;
+    console.log(editingElement);
     createQuizzStart();
 }
 
