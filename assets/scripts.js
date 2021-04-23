@@ -158,7 +158,7 @@ function createQuestions(){
     const questionsAll = questionsContainer.querySelectorAll(".forms-container");
     questions = [];
     let erros = 0;
-    
+
     questionsAll.forEach(element => {
 
         const title = element.querySelector(".create-quizz-question");
@@ -220,7 +220,7 @@ function questionsValidation(title, color, correctAnswer, correctImg, answersArr
         erros++;
     }
 
-    if(correctAnswer.value === null){
+    if(correctAnswer.value === ""){
         correctAnswer.nextSibling.nextSibling.classList.remove("hidden");
         erros++;
     }
@@ -231,7 +231,7 @@ function questionsValidation(title, color, correctAnswer, correctImg, answersArr
     }
 
     if(answersArray.length < 2){
-        alert(`Por favor, insira ao menos uma resposta errada (texto e URL da imagem) na pergunta ${i+1}!`);
+        alert(`Por favor, insira ao menos uma resposta errada (texto e URL da imagem) por pergunta!`);
         erros++;
     }
 
@@ -273,15 +273,15 @@ function createLevels(){
         const title = element.querySelector(".create-quizz-level-title");
         const image = element.querySelector(".create-quizz-level-img");
         const text = element.querySelector(".create-quizz-level-description");
-        const minValue = parseInt(element.querySelector(".create-quizz-level-min"));
+        const minValue = element.querySelector(".create-quizz-level-min");
 
         erros += validLevel(title,minValue,image,text,erros);
-        auxLevel *= minValue;
+        auxLevel *= minValue.value;
         levels.push({
             title: title.value,
             image: image.value,
             text: text.value,
-            minValue: minValue.value
+            minValue: parseInt(minValue.value)
         })
     })
 
@@ -299,22 +299,22 @@ function createLevels(){
 
 function validLevel(title,minValue,image,text,erros){
 
-    const textValid = text.nextElementSibling.nextElementSibling;
-    const minValueValid = minValue.nextElementSibling.nextElementSibling;
-    const imageValid = image.nextElementSibling.nextElementSibling;
-    const titleValid = title.nextElementSibling.nextElementSibling;
+    const textValid = text.nextElementSibling;
+    const minValueValid = minValue.nextElementSibling;
+    const imageValid = image.nextElementSibling;
+    const titleValid = title.nextElementSibling;
     
-    textValid.classList.add(hidden);
-    minValueValid.classList.add(hidden);
-    imageValid.classList.add(hidden);
-    titleValid.classList.add(hidden);
+    textValid.classList.add("hidden");
+    minValueValid.classList.add("hidden");
+    imageValid.classList.add("hidden");
+    titleValid.classList.add("hidden");
 
     if(title.value.length < 10){
         titleValid.classList.remove("hidden");
         erros++;
     }
 
-    if(minValue.value > 100){
+    if(minValue.value > 100 || minValue.value === ""){
         minValueValid.classList.remove("hidden");
         erros++;
     }
