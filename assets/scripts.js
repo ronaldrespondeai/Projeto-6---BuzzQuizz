@@ -389,8 +389,6 @@ function LoadQuizz(post) {
             `;
         });
     });
-    const quizzResult = document.querySelector(".quizz-result");
-    quizzResult.classList.add('hidden');
     window.scrollTo(0,0);
 }
 
@@ -441,16 +439,17 @@ function loadResult(){ /*Função para popular o resultado!*/
             actualLevel = element.minValue;
         };
     });
-    const quizzResultContainer = document.querySelector(".quizz-result");
-    quizzResultContainer.innerHTML = "";
-    quizzResultContainer.innerHTML += `
-    <div class="quizz-result-title"><strong>${hits}% de acerto: ${levelTitle}</strong></div>
-    <div class="quizz-result-content">
-        <img src="${levelImage}" alt="">
-        <div><strong>${levelText}</strong></div>
-    </div>
-    <button type="submit" class="reset-quizz-button result" onclick="RequireQuizz(${loadedQuizz.data.id})">Reiniciar Quizz</button>
-    <button class="button-home result" type="submit" onclick="goHome()">Voltar pra home</button>
+    const quizzResultContainer = document.querySelector(".quizz-result-container");
+    quizzResultContainer.innerHTML = `
+        <div class="quizz-result">
+            <div class="quizz-result-title"><strong>${hits}% de acerto: ${levelTitle}</strong></div>
+            <div class="quizz-result-content">
+                <img src="${levelImage}" alt="">
+                <div><strong>${levelText}</strong></div>
+            </div>
+        </div>
+        <button type="submit" class="reset-quizz-button result" onclick="RequireQuizz(${loadedQuizz.data.id})">Reiniciar Quizz</button>
+        <button class="button-home result" type="submit" onclick="goHome()">Voltar pra home</button>
     `
 }
 
@@ -464,8 +463,8 @@ function scrollNextQuestion(actual){
 }
 
 function scrollQuizzResult(){
-    const quizzResult = document.querySelector(".quizz-result");
-    quizzResult.classList.remove('hidden');
+    const quizzResult = document.querySelector(".quizz-result-container");
+    toggleHidden(quizzResult);
     quizzResult.scrollIntoView();
 }
 

@@ -86,7 +86,7 @@ body {
 
 .forms-container strong{
     margin-bottom: 12px;
-    margin: 28px 0 14px 0;
+    margin: 28px 0 24px 0;
 }
 
 input {
@@ -139,6 +139,10 @@ input::placeholder{
 
 .quizz-basics-screen input{
     margin-bottom: 9px;
+}
+
+.quizz-basics-screen input:last-of-type{
+    margin-bottom: 0px;
 }
 
 .quizz-basics-screen .forms-container{
@@ -313,6 +317,7 @@ input::placeholder{
     color: #FFF;
     font-size: 19px;
     line-height: 22px;
+    word-break: break-all;
 }
 
 .selected-quizz-box img {
@@ -360,6 +365,12 @@ input::placeholder{
     align-items: center;
 }
 
+.quizz-result-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .quizz-result-title{
     font-size: 19px;
     width: 340px;
@@ -395,6 +406,10 @@ input::placeholder{
     width: 340px;
     display: flex;
     align-items: center;
+}
+
+.quizz-result-content strong{
+    word-break: break-all;
 }
 
 .reset-quizz-button{
