@@ -73,6 +73,11 @@ body {
     font-size: 21px;
 }
 
+.create-quizz-icon{
+    font-size: 40px;
+    color: #000000;
+}
+
 .forms-container{
     margin: 29px auto;
     padding: 0 18px 27px 16px;
@@ -87,6 +92,7 @@ body {
 .forms-container strong{
     margin-bottom: 12px;
     margin: 28px 0 24px 0;
+    display: block;
 }
 
 input {
@@ -542,4 +548,19 @@ input::placeholder{
 
 .hidden{
     display: none;
+}
+
+
+/* collapsible menu create quizz */
+
+.collapsible-menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.collapsible-content{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
 }

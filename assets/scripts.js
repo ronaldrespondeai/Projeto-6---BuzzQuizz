@@ -95,21 +95,36 @@ function createQuestionsScreen(numberQuestions){
     for(let i = 1; i<numberQuestions+1; i++){
         questionsContainer.innerHTML += `
         <div class="forms-container">
-        <strong>Pergunta ${i}</strong>
-        <input class="create-quizz-question" required type="text" placeholder="Texto da pergunta" minlength="20">
-        <input class="create-quizz-background" required type="text" placeholder="Cor de fundo da pergunta" pattern="#+.{6}">
-        <strong>Resposta correta</strong>
-        <input class="create-quizz-answer" required type="text" placeholder="Resposta correta">
-        <input class="create-quizz-answerimg" required type="url" placeholder="URL da imagem">
-        <strong>Respostas incorretas</strong>
-        <input class="create-quizz-wronganswer" required type="text" placeholder="Resposta incorreta 1">
-        <input class="create-quizz-wronganswerimg" required type="url" placeholder="URL da imagem 1">
-        <input class="create-quizz-wronganswer" type="text" placeholder="Resposta incorreta 2">
-        <input class="create-quizz-wronganswerimg" type="url" placeholder="URL da imagem 2">
-        <input class="create-quizz-wronganswer" type="text" placeholder="Resposta incorreta 3">
-        <input class="create-quizz-wronganswerimg" type="url" placeholder="URL da imagem 3">
+            <div class="collapsible-menu" onclick="collapsibleMenu(this)">
+                <strong>Pergunta ${i}</strong>
+                <ion-icon class="create-quizz-icon" name="create-outline"></ion-icon>
+            </div>
+            <div class="collapsible-content hidden">
+                <input class="create-quizz-question" required type="text" placeholder="Texto da pergunta" minlength="20">
+                <input class="create-quizz-background" required type="text" placeholder="Cor de fundo da pergunta" pattern="#+.{6}">
+                <strong>Resposta correta</strong>
+                <input class="create-quizz-answer" required type="text" placeholder="Resposta correta">
+                <input class="create-quizz-answerimg" required type="url" placeholder="URL da imagem">
+                <strong>Respostas incorretas</strong>
+                <input class="create-quizz-wronganswer" required type="text" placeholder="Resposta incorreta 1">
+                <input class="create-quizz-wronganswerimg" required type="url" placeholder="URL da imagem 1">
+                <input class="create-quizz-wronganswer" type="text" placeholder="Resposta incorreta 2">
+                <input class="create-quizz-wronganswerimg" type="url" placeholder="URL da imagem 2">
+                <input class="create-quizz-wronganswer" type="text" placeholder="Resposta incorreta 3">
+                <input class="create-quizz-wronganswerimg" type="url" placeholder="URL da imagem 3">
+            </div>
         </div>
         `
+    }
+}
+
+function collapsibleMenu(element){
+    let content = element.nextElementSibling;
+    content.classList.toggle("hidden");
+    if(content.style.maxHeight){
+        content.style.maxHeight = null;
+    }else{
+        content.style.maxHeight = content.scrollHeight + "px";
     }
 }
 
@@ -179,16 +194,23 @@ function createLevelsScreen(numberLevels){
     levelsContainer.innerHTML = "";
     for(let i = 1; i<numberLevels+1; i++){
         levelsContainer.innerHTML += `
-        <div class="forms-container">
-        <strong>Nível ${i}</strong>
-        <input class="create-quizz-level-title" required type="text" placeholder="Título do nível" minlength="10">
-        <input class="create-quizz-level-min" required type="number" placeholder="% de acerto mínima" min="0" max="100">
-        <input class="create-quizz-level-img" required type="url" placeholder="URL da imagem do nível">
-        <input class="create-quizz-level-description" required type="text" placeholder="Descrição do nível" minlength="30">
+    <div class="forms-container">
+        <div class="collapsible-menu" onclick="collapsibleMenu(this)">   
+            <strong>Nível ${i}</strong>
+            <ion-icon name="create-outline"></ion-icon>
+        </div>
+        <div class="collapsible-content hidden">
+            <input class="create-quizz-level-title" required type="text" placeholder="Título do nível" minlength="10">
+            <input class="create-quizz-level-min" required type="number" placeholder="% de acerto mínima" min="0" max="100">
+            <input class="create-quizz-level-img" required type="url" placeholder="URL da imagem do nível">
+            <input class="create-quizz-level-description" required type="text" placeholder="Descrição do nível" minlength="30">
+        </div>
     </div>
         `
     }
 }
+
+
 
 function validLevel(title,minValue,image,text,i,erros){
     if(title.length < 10){
@@ -471,7 +493,6 @@ function scrollQuizzResult(){
 function textEffect(element){
 
     const childrens = element.parentNode.children;
-
     for(let i = 1; i<childrens.length; i++){
         childrens[i].classList.remove("unselected");
     }
