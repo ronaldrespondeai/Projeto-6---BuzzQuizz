@@ -404,13 +404,16 @@ function checkColor(element){
 
 function AnswerCheck(bool, element) {
 
-    if(element.parentNode.classList.length === 1){
+    //if(element.parentNode.classList.length === 1){
         opacityEffect(element);
         textEffect(element);
         answered++;
         if(bool){correctAnswers++;}
+    //}
+    const father = element.parentNode;
+    for (let i = 0; i<father.children.length; i++) {
+        father.children[i].setAttribute('onclick', '');
     }
-    //element.setAttribute('onclick', '');
     
     const actual = element.parentNode;
     actual.classList.add("answered");
