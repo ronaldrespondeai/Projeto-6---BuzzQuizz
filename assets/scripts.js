@@ -5,6 +5,7 @@ const quizzFinalScreen = document.querySelector(".quizz-final-screen");
 const questionsContainer = document.querySelector(".quizz-questions-screen div:first-of-type");
 const levelsContainer = document.querySelector(".quizz-levels-screen div:first-of-type");
 const homePage = document.querySelector(".home");
+const quizzResult = document.querySelector(".quizz-result-container")
 let title;
 let imgUrl;
 let questions;
@@ -371,6 +372,9 @@ function deleteQuizz(id){
 }
 
 function RequireQuizz(id) {
+    quizzResult.classList.add("hidden");
+    correctAnswers=0;
+    answered=0;
     const promise = axios.get(`
     https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes/${id}
     `);
@@ -499,7 +503,6 @@ function scrollNextQuestion(actual){
 }
 
 function scrollQuizzResult(){
-    const quizzResult = document.querySelector(".quizz-result-container");
     toggleHidden(quizzResult);
     quizzResult.scrollIntoView();
 }
