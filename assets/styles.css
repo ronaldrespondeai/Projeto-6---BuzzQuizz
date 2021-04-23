@@ -304,7 +304,7 @@ input::placeholder{
 
 .selected-quizz-box {
     width: 375px;
-    height: 436px;
+    min-height: 436px;
     padding: 18px 17px 23px 18px;
     display: flex;
     flex-wrap: wrap;
@@ -332,9 +332,11 @@ input::placeholder{
     width: 163px;
     height: 113px;
     object-fit: cover;
+    margin-top: 13px;
 }
 
 .selected-quizz-box p {
+    width: 163px;
     word-break: break-all;
     margin-top: 5px;
     font-size: 13px;
@@ -500,7 +502,7 @@ input::placeholder{
 
     .selected-quizz-box {
         width: 759px;
-        height: 676px;
+        min-height: 676px;
         padding: 28px 34px 35px 36px;
     }
 
@@ -514,9 +516,11 @@ input::placeholder{
     .selected-quizz-box img {
         width: 330px;
         height: 175px;
+        margin-top: 18px;
     }
 
     .selected-quizz-box p {
+        width: 330px;
         font-size: 20px;
         line-height: 23px;
     }
