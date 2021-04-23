@@ -398,7 +398,7 @@ function sendQuizzSucess(letter){ //coletando id do post para o localStorage
 
 function deleteQuizz(id){
     if(window.confirm("Realmente deseja apagar esse seu quizz?")){
-        const index = userIds.findIndex(element => element == id);
+        const index = userIds.indexOf(id); //findIndex(element => element == id), se der ruim, esse funciona kkk
         const key = userKeys[index];
 
         const secretKey = {headers: {'Secret-Key': key}};
