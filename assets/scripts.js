@@ -364,29 +364,28 @@ function sendQuizzSucess(letter){ //coletando id do post para o localStorage
     userKeys.push(key);
     localStorage.setItem('userKeys', userKeys.toString());
 
-    deleteQuizz(id, key) //tentativa de apagar logo após enviar
+    //deleteQuizz(id) //tentativa de apagar logo após enviar
 
     const accessQuizz = document.querySelector('.access');
     accessQuizz.setAttribute('onclick', `RequireQuizz(${id})`); 
 }
 
-function deleteQuizz(id, key){
+function deleteQuizz(id){
     if(window.confirm("Realmente deseja apagar esse seu quizz?")){
+        const index = userIds.findIndex(element => element == id);
+        const key = userKeys[index];
+
         const secretKey = {headers: {'Secret-Key': key}};
         const require = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes/${id}`, secretKey);
         
         //remover o id deletado do localStorage
-        userIds.filter(i => {
-            const notThis = !(i == id);
-            return notThis;
-        });
+        userIds.splice(index, 1);
         localStorage.setItem('userIds', userIds.toString());
         //remover a key deletada do localStorage
-        userKeys.filter(i => {
-            const notThis = !(i == key);
-            return notThis;
-        });
+        userKeys.splice(index, 1);
         localStorage.setItem('userKeys', userKeys.toString());
+
+        RequireQuizzes();
     }
 }
 
