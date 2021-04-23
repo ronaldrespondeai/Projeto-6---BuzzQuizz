@@ -14,9 +14,12 @@ let levels;
 let numberLevels=0;
 let correctAnswers=0;
 let answered=0;
-const userIds = GetUserIds().split(","); //para o localStorage.(set/get)Item
+const userIds = GetUserIds().split(",");
+const userKeys = GetUserKeys().split(",");
 let numberOfQuestions=0;
 let loadedQuizz;
+
+//GetUserLocal();
 
 function toggleHidden(element){
     element.classList.toggle("hidden");
@@ -354,12 +357,14 @@ function sendQuizzSucess(letter){ //coletando id do post para o localStorage
     RequireQuizzes(); //Recarregar lista de quizzes ao criar um quizz novo.
     alert("Seu quizz foi enviado com sucesso!");
     const id = letter.data.id;
+    const key = letter.data.key;
 
     userIds.push(id);
     localStorage.setItem('userIds', userIds.toString());
+    userKeys.push(key);
+    localStorage.setItem('userKeys', userKeys.toString());
 
-    const key = letter.data.key; // tentativa de apagar o quizz logo após criar ele
-    deleteQuizz(id, key)
+    deleteQuizz(id, key) //tentativa de apagar logo após enviar
     const accessQuizz = document.querySelector('.access');
     accessQuizz.setAttribute('onclick', `RequireQuizz(${id})`); 
 }
@@ -384,12 +389,12 @@ RequireQuizzes();
 
 function RequireQuizzes() {
     const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes');
-    toggleHidden(loadingScreen);
+    //toggleHidden(loadingScreen);
     promise.then(LoadQuizzes);
 }
 
 function LoadQuizzes(post) {
-    toggleHidden(loadingScreen);
+    //toggleHidden(loadingScreen);
     const ulAllQuizzes = document.querySelector('.ul-all-quizzes');
     ulAllQuizzes.innerHTML = '';
 
@@ -595,12 +600,19 @@ function Shuffle() {
 // Quizz Loading
 
 function GetUserIds() {
-    let Ids = [];
     if (localStorage.getItem('userIds') !== null) {
-        Ids = localStorage.getItem('userIds');
-        return Ids;
+        const ids = localStorage.getItem('userIds');
+        return ids;
     }
-    return "";
+    return '';
+}
+
+function GetUserKeys() {
+    if (localStorage.getItem('userKeys') !== null) {
+        const keys = localStorage.getItem('userKeys');
+        return keys;
+    }
+    return '';
 }
 
 function CheckUserIds(obj) {
