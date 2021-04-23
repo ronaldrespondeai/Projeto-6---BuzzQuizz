@@ -156,15 +156,23 @@ function createQuestionsScreen(numberQuestions){
     if(editingQuizz === true){
         const questionName = document.querySelectorAll(".create-quizz-question");
         const questionBackground = document.querySelectorAll(".create-quizz-background");
-        // const questionAnswer = document.querySelectorAll(".create-quizz-answer");
-        // const questionAnswerImg = document.querySelectorAll(".create-quizz-answerimg");
+        const questionAnswer = document.querySelectorAll(".create-quizz-answer");
+        const questionAnswerImg = document.querySelectorAll(".create-quizz-answerimg");
         
         let i = 0;
         while(i<editingElement.questions.length){
             questionName[i].value += editingElement.questions[i].title;
             questionBackground[i].value += editingElement.questions[i].color;
+
+            for(let j = 0; j<editingElement.questions[i].answers.length; j++){
+                questionAnswer[i].value += editingElement.questions[i].answers[j].text;
+                questionAnswerImg[i].value += editingElement.questions[i].answers[j].image;
+            }
+            
             i++;
         }
+
+
     }
 
 }
