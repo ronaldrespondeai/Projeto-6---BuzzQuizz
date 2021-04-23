@@ -5,7 +5,8 @@ const quizzFinalScreen = document.querySelector(".quizz-final-screen");
 const questionsContainer = document.querySelector(".quizz-questions-screen div:first-of-type");
 const levelsContainer = document.querySelector(".quizz-levels-screen div:first-of-type");
 const homePage = document.querySelector(".home");
-const quizzResult = document.querySelector(".quizz-result-container")
+const quizzResult = document.querySelector(".quizz-result-container");
+const loadingScreen = document.querySelector(".loading-screen");
 let title;
 let imgUrl;
 let questions;
@@ -292,12 +293,13 @@ function sendCreatedQuizz(){
     }
 
     const sendQuizz = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes", createdQuizz);
-
+    toggleHidden(loadingScreen);
     sendQuizz.then(sendQuizzSucess);
     sendQuizz.catch(sendQuizzError);
 }
 
 function sendQuizzSucess(letter){ //coletando id do post para o localStorage
+    toggleHidden(loadingScreen);
     RequireQuizzes(); //Recarregar lista de quizzes ao criar um quizz novo.
     alert("Seu quizz foi enviado com sucesso!");
     const id = letter.data.id;
@@ -331,10 +333,12 @@ RequireQuizzes();
 
 function RequireQuizzes() {
     const promise = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes');
+    toggleHidden(loadingScreen);
     promise.then(LoadQuizzes);
 }
 
 function LoadQuizzes(post) {
+    toggleHidden(loadingScreen);
     const ulAllQuizzes = document.querySelector('.ul-all-quizzes');
     ulAllQuizzes.innerHTML = '';
 
@@ -379,6 +383,7 @@ function LoadQuizzes(post) {
 }
 
 function RequireQuizz(id) {
+    toggleHidden(loadingScreen);
     quizzResult.classList.add("hidden");
     correctAnswers=0;
     answered=0;
@@ -389,6 +394,7 @@ function RequireQuizz(id) {
 }
 
 function LoadQuizz(post) {
+    toggleHidden(loadingScreen);
     loadedQuizz = post;
     const quizzFinalScreen = document.querySelector('.quizz-final-screen');
     quizzFinalScreen.classList.add('hidden');
