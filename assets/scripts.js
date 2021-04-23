@@ -120,6 +120,11 @@ function createQuestionsScreen(numberQuestions){
 }
 
 function collapsibleMenu(element){
+
+    const allCollapsibleContent = document.querySelectorAll(".collapsible-content");
+    allCollapsibleContent.forEach(element => element.classList.add("hidden"));
+    // fechar os outros menus
+
     let content = element.nextElementSibling;
     content.classList.toggle("hidden");
     if(content.style.maxHeight){
