@@ -152,6 +152,21 @@ function createQuestionsScreen(numberQuestions){
         </div>
         `
     }
+
+    if(editingQuizz === true){
+        const questionName = document.querySelectorAll(".create-quizz-question");
+        const questionBackground = document.querySelectorAll(".create-quizz-background");
+        // const questionAnswer = document.querySelectorAll(".create-quizz-answer");
+        // const questionAnswerImg = document.querySelectorAll(".create-quizz-answerimg");
+        
+        let i = 0;
+        while(i<editingElement.questions.length){
+            questionName[i].value += editingElement.questions[i].title;
+            questionBackground[i].value += editingElement.questions[i].color;
+            i++;
+        }
+    }
+
 }
 
 function collapsibleMenu(element){
@@ -277,6 +292,7 @@ function createLevelsScreen(numberLevels){
     </div>
         `
     }
+    
     if(editingQuizz === true){
         const titleLevel = document.querySelectorAll(".create-quizz-level-title");
         const minValueLevel = document.querySelectorAll(".create-quizz-level-min");
@@ -284,7 +300,7 @@ function createLevelsScreen(numberLevels){
         const descriptionLevel = document.querySelectorAll(".create-quizz-level-description");
     
         let i = 0;
-        while(i<2){
+        while(i<editingElement.levels.length){
             titleLevel[i].value += editingElement.levels[i].title;
             descriptionLevel[i].value += editingElement.levels[i].text;
             minValueLevel[i].value += editingElement.levels[i].minValue;
