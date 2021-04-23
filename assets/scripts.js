@@ -278,24 +278,20 @@ function createLevelsScreen(numberLevels){
         `
     }
     if(editingQuizz === true){
-        setTimeout(preencher,1000);
+        const titleLevel = document.querySelectorAll(".create-quizz-level-title");
+        const minValueLevel = document.querySelectorAll(".create-quizz-level-min");
+        const imgLevel = document.querySelectorAll(".create-quizz-level-img");
+        const descriptionLevel = document.querySelectorAll(".create-quizz-level-description");
+    
+        let i = 0;
+        while(i<2){
+            titleLevel[i].value += editingElement.levels[i].title;
+            descriptionLevel[i].value += editingElement.levels[i].text;
+            minValueLevel[i].value += editingElement.levels[i].minValue;
+            imgLevel[i].value += editingElement.levels[i].image;
+            i++;
+        } // for não funcionava de jeito nenhum?
     }
-}
-
-function preencher(){
-    const titleLevel = document.querySelectorAll(".create-quizz-level-title");
-    const minValueLevel = document.querySelectorAll(".create-quizz-level-min");
-    const imgLevel = document.querySelectorAll(".create-quizz-level-img");
-    const descriptionLevel = document.querySelectorAll(".create-quizz-level-description");
-
-    let i = 0;
-    while(i<2){
-        titleLevel[i].value += editingElement.levels[i].title;
-        descriptionLevel[i].value += editingElement.levels[i].text;
-        minValueLevel[i].value += editingElement.levels[i].minValue;
-        imgLevel[i].value += editingElement.levels[i].image;
-        i++;
-    } // for não funcionava de jeito nenhum?
 }
 
 quizzLevelsScreen.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createLevels()}});
