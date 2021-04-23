@@ -224,40 +224,15 @@ function createLevelsScreen(numberLevels){
             <input class="create-quizz-level-title" required type="text" placeholder="Título do nível" minlength="10">
             <span class="hidden">O título do nível precisa ter ao menos 10 caracteres!</span>
             <input class="create-quizz-level-min" required type="number" placeholder="% de acerto mínima" min="0" max="100">
-            <span>O valor mínimo do nível precisa estar entre 0 e 100</span>
+            <span class="hidden">O valor mínimo do nível precisa estar entre 0 e 100</span>
             <input class="create-quizz-level-img" required type="url" placeholder="URL da imagem do nível">
-            <span>Insira um link válido para a imagem do nível!</span>
+            <span class="hidden">Insira um link válido para a imagem do nível!</span>
             <input class="create-quizz-level-description" required type="text" placeholder="Descrição do nível" minlength="30">
-            <span>O texto do nível precisa ter ao menos 30 caracteres!</span>
+            <span class="hidden">O texto do nível precisa ter ao menos 30 caracteres!</span>
         </div>
     </div>
         `
     }
-}
-
-function validLevel(title,minValue,image,text,erros){
-    if(title.value.length < 10){
-        console.log(title.nextElementSibling.nextElementSibling);
-        title.nextElementSibling.nextElementSibling.classList.toggle("hidden");
-        erros++;
-    }
-
-    if(minValue.value > 100){
-        alert(`O valor mínimo do nível precisa estar entre 0 e 100`);
-        erros++;
-    }
-    
-    if(!validURL(image.value)){
-        alert(`Insira um link válido para a imagem do nível!`);
-        erros++;
-    }
-
-    if(text.value < 30){
-        alert(`O texto do nível precisa ter ao menos 30 caracteres!`);
-        erros++;
-    }
-
-    return erros
 }
 
 quizzLevelsScreen.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createLevels()}});
@@ -293,6 +268,40 @@ function createLevels(){
         toggleHidden(quizzFinalScreen);
         sendCreatedQuizz();
     }
+}
+
+function validLevel(title,minValue,image,text,erros){
+
+    const textValid = text.nextElementSibling.nextElementSibling;
+    const minValueValid = minValue.nextElementSibling.nextElementSibling;
+    const imageValid = image.nextElementSibling.nextElementSibling;
+    const titleValid = title.nextElementSibling.nextElementSibling;
+    
+    textValid.classList.add(hidden);
+    minValueValid.classList.add(hidden);
+    imageValid.classList.add(hidden);
+    titleValid.classList.add(hidden);
+
+    if(title.value.length < 10){
+        titleValid.classList.remove("hidden");
+        erros++;
+    }
+
+    if(minValue.value > 100){
+        minValueValid.classList.remove("hidden");
+        erros++;
+    }
+    
+    if(!validURL(image.value)){
+        imageValid.classList.remove("hidden");
+        erros++;
+    }
+
+    if(text.value < 30){
+        textValid.classList.remove("hidden");
+        erros++;
+    }
+    return erros
 }
 
 function goHome(){
