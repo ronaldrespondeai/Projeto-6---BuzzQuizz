@@ -369,9 +369,9 @@ function sendQuizzSucess(letter){ //coletando id do post para o localStorage
     accessQuizz.setAttribute('onclick', `RequireQuizz(${id})`); 
 }
 
-function deleteQuizz(id, keyToken){
+function deleteQuizz(id, key){
     if(window.confirm("Realmente deseja apagar esse seu quizz?")){
-        const secretKey = {headers: {Authorization: keyToken}}
+        const secretKey = {headers: {'Secret-Key': key}};
         const require = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes/${id}`, secretKey);
         // NÃO CONSEGUI FAZER
         require.then( (response) => console.log(response));
