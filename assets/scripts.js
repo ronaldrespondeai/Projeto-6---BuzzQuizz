@@ -411,7 +411,7 @@ function deleteQuizz(id){
         userKeys.splice(index, 1);
         localStorage.setItem('userKeys', userKeys.toString());
 
-        RequireQuizzes();
+        window.location.reload();
     }
 }
 
