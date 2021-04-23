@@ -13,7 +13,7 @@ let numberLevels=0;
 let correctAnswers=0;
 let answered=0;
 const userIds = GetUserIds().split(","); //para o localStorage.(set/get)Item
-let numberQuestions=0;
+let numberOfQuestions=0;
 let loadedQuizz;
 
 function toggleHidden(element){
@@ -375,7 +375,7 @@ function LoadQuizz(post) {
     quizzPage.classList.remove('hidden');
 
     const quizz = post.data;
-    numberQuestions = quizz.questions.length;
+    numberOfQuestions = quizz.questions.length;
     answered = 0;
     correctAnswers = 0;
     
@@ -438,7 +438,7 @@ function AnswerCheck(bool, element) {
     const actual = element.parentNode;
     actual.classList.add("answered");
 
-    if(answered === numberQuestions){
+    if(answered === numberOfQuestions){
         loadResult();
         setTimeout(scrollQuizzResult,2000);
     }else{
