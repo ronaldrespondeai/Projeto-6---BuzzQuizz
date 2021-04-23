@@ -390,7 +390,7 @@ function sendQuizzSucess(letter){ //coletando id do post para o localStorage
     userKeys.push(key);
     localStorage.setItem('userKeys', userKeys.toString());
 
-    deleteQuizz(id, key) //tentativa de apagar logo após enviar
+    //deleteQuizz(id, key) //tentativa de apagar logo após enviar
 
     const accessQuizz = document.querySelector('.access');
     accessQuizz.setAttribute('onclick', `RequireQuizz(${id})`); 
@@ -447,14 +447,18 @@ function LoadQuizzes(post) {
     const allQuizzes = quizzes.filter(UnCheckUserIds); //todos que não tem id contido em userIds
     
     userQuizzes.forEach(element => {
+        const id = parseInt(element.id);
+        const key = userKeys[userIds.indexOf(id.toString())];
+        console.log(id);
+        console.log(key);
         ulUserQuizzes.innerHTML += `
         <li class="quizz quizz${element.id}">
             <div class="user-quizz-options">
-                <ion-icon onclick="editQuizz(${element.id}, ${element.key})" name="create-outline"></ion-icon>
-                <ion-icon onclick="deleteQuizz(${element.id})" name="trash-outline"></ion-icon>
+                <ion-icon onclick="editQuizz(${id}, ${key})" name="create-outline"></ion-icon>
+                <ion-icon onclick="deleteQuizz(${id}, ${key})" name="trash-outline"></ion-icon>
             </div>
             <img src="${element.image}" alt="">
-            <div onclick="RequireQuizz(${element.id})" class="gradient"></div>
+            <div onclick="RequireQuizz(${id})" class="gradient"></div>
             <p>${element.title}</p>
         </li>
         `;
