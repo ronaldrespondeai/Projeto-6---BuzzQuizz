@@ -372,7 +372,7 @@ function editQuizzSucess(letter){
 }
 
 function editQuizz(id){
-    const index = userIds.indexOf(id); //findIndex(element => element == id), se der ruim, esse funciona kkk
+    const index = userIds.indexOf(id.toString()); //findIndex(element => element == id), se der ruim, esse funciona kkk
     const key = userKeys[index];
     editId = id;
     editKey = key;
