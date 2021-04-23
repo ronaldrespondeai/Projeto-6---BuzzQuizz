@@ -117,10 +117,14 @@ function createQuestionsScreen(numberQuestions){
             </div>
             <div class="collapsible-content hidden">
                 <input class="create-quizz-question" required type="text" placeholder="Texto da pergunta" minlength="20">
+                <span class="hidden">Por favor, insira um texto maior!</span>
                 <input class="create-quizz-background" required type="text" placeholder="Cor de fundo da pergunta" pattern="#+.{6}">
+                <span class="hidden">Por favor, insira uma cor válida! Formato: #XXXXXX</span>
                 <strong>Resposta correta</strong>
                 <input class="create-quizz-answer" required type="text" placeholder="Resposta correta">
+                <span class="hidden">Por favor, insira uma resposta correta!</span>
                 <input class="create-quizz-answerimg" required type="url" placeholder="URL da imagem">
+                <span class="hidden">Por favor, insira link válido!</span>
                 <strong>Respostas incorretas</strong>
                 <input class="create-quizz-wronganswer" required type="text" placeholder="Resposta incorreta 1">
                 <input class="create-quizz-wronganswerimg" required type="url" placeholder="URL da imagem 1">
@@ -154,28 +158,21 @@ function createQuestions(){
     const questionsAll = questionsContainer.querySelectorAll(".forms-container");
     questions = [];
     let erros = 0;
-    let i = 0;
+    
     questionsAll.forEach(element => {
 
-        const title = element.querySelector(".create-quizz-question").value;
-        const color = element.querySelector(".create-quizz-background").value
-
-        if( title.length < 20 || !validColor(color)){
-            alert(`Por favor, insira um texto maior e/ou uma cor válida na pergunta ${i+1}!`);
-            erros++;
-        }
+        const title = element.querySelector(".create-quizz-question");
+        const color = element.querySelector(".create-quizz-background");
 
         let answersArray = [];
 
-        const correctAnswer = element.querySelector(".create-quizz-answer").value;
-        const correctImg = element.querySelector(".create-quizz-answerimg").value;
+        const correctAnswer = element.querySelector(".create-quizz-answer");
+        const correctImg = element.querySelector(".create-quizz-answerimg");
         const answersWrong = element.querySelectorAll(".create-quizz-wronganswer");
         const answersWrongImg = element.querySelectorAll(".create-quizz-wronganswerimg");
 
-        if(correctAnswer === null || !validURL(correctImg)){
-            alert(`Por favor, insira uma resposta correta (texto e URL da imagem) na pergunta ${i+1}!`);
-            erros++;
-        }
+        correctAnswer.nextSibling.nextSibling.classList.add("hidden");
+        correctImg.nextSibling.nextSibling.classList.add("hidden");
         
         for(j = 0; j<answersWrong.length; j++){
             answersArray.push({
@@ -187,20 +184,15 @@ function createQuestions(){
         answersArray = answersArray.filter(notNullObject);
         
         answersArray.push({
-            text: correctAnswer, 
-            image: correctImg, 
+            text: correctAnswer.value, 
+            image: correctImg.value, 
             isCorrectAnswer: true});
 
-        if(answersArray.length < 2){
-            alert(`Por favor, insira ao menos uma resposta errada (texto e URL da imagem) na pergunta ${i+1}!`);
-            erros++;
-        }
-
-        i++;
+        erros += questionsValidation(title, color, correctAnswer, correctImg, answersArray);
 
         questions.push({ 
-            title: title,  
-            color: color,
+            title: title.value,  
+            color: color.value,
             answers: answersArray})
     });
 
@@ -209,6 +201,41 @@ function createQuestions(){
         toggleHidden(quizzLevelsScreen);
     }
 
+}
+
+function questionsValidation(title, color, correctAnswer, correctImg, answersArray){
+
+    let erros = 0;
+
+    title.nextSibling.nextSibling.classList.add("hidden");
+    color.nextSibling.nextSibling.classList.add("hidden");
+
+    if(title.value.length < 20){
+        title.nextSibling.nextSibling.classList.remove("hidden");
+        erros++;
+    }
+
+    if(!validColor(color.value)){
+        color.nextSibling.nextSibling.classList.remove("hidden");
+        erros++;
+    }
+
+    if(correctAnswer.value === null){
+        correctAnswer.nextSibling.nextSibling.classList.remove("hidden");
+        erros++;
+    }
+
+    if(!validURL(correctImg.value)){
+        correctImg.nextSibling.nextSibling.classList.remove("hidden");
+        erros++;
+    }
+
+    if(answersArray.length < 2){
+        alert(`Por favor, insira ao menos uma resposta errada (texto e URL da imagem) na pergunta ${i+1}!`);
+        erros++;
+    }
+
+    return erros
 }
 
 function createLevelsScreen(numberLevels){
