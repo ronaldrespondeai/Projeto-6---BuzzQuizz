@@ -15,6 +15,7 @@ let answered=0;
 const userIds = GetUserIds().split(","); //para o localStorage.(set/get)Item
 let numberOfQuestions=0;
 let loadedQuizz;
+const secretKey = {header:"Secret-Key"}; // não consegui!
 
 function toggleHidden(element){
     element.classList.toggle("hidden");
@@ -329,9 +330,13 @@ function LoadQuizzes(post) {
     
     userQuizzes.forEach(element => {
         ulUserQuizzes.innerHTML += `
-        <li class="quizz quizz${element.id}" onclick="RequireQuizz(${element.id})">
+        <li class="quizz quizz${element.id}">
+            <div class="user-quizz-options">
+                <ion-icon name="create-outline"></ion-icon>
+                <ion-icon onclick="deleteQuizz(${element.id})" name="trash-outline"></ion-icon>
+            </div>
             <img src="${element.image}" alt="">
-            <div class="gradient"></div>
+            <div onclick="RequireQuizz(${element.id})" class="gradient"></div>
             <p>${element.title}</p>
         </li>
         `;
@@ -354,6 +359,15 @@ function LoadQuizzes(post) {
         divCreateQuizz.classList.add('hidden');
     }
     window.scrollTo(0,0);
+}
+
+function deleteQuizz(id){
+    if(window.confirm("Realmente deseja apagar esse seu quizz?")){
+        const require = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes/${id}`, secretKey);
+        // NÃO CONSEGUI FAZER
+        require.then( (response) => console.log(response));
+        require.catch( (response) => console.log(response));
+    }
 }
 
 function RequireQuizz(id) {

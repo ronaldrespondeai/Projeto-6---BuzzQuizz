@@ -557,6 +557,7 @@ input::placeholder{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .collapsible-content{
@@ -564,3 +565,31 @@ input::placeholder{
     overflow: hidden;
     transition: max-height 0.4s ease-out;
 }
+
+/* collapsible menu create quizz */
+
+
+/* user quizzes options */
+.user-quizz-options{
+    width: 43px;
+    height: 87px;
+    border-radius: 10px 0px 0px 11px;
+    background-color: #EC362D;
+    position: absolute;
+    font-size: 32px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    right: 0;
+    top: 9px;
+    z-index: 2;
+}
+
+ion-icon:hover{
+    color: black;
+}
+
+
+/* user quizzes options */
