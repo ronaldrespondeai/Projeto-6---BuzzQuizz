@@ -18,7 +18,9 @@ const userIds = GetUserIds().split(",");
 const userKeys = GetUserKeys().split(",");
 let numberOfQuestions=0;
 let loadedQuizz;
-
+let editingQuizz = false;
+let editId = "";
+let editKey = "";
 //GetUserLocal();
 
 function toggleHidden(element){
@@ -346,10 +348,34 @@ function sendCreatedQuizz(){
         levels: levels
     }
 
-    const sendQuizz = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes", createdQuizz);
     toggleHidden(loadingScreen);
-    sendQuizz.then(sendQuizzSucess);
-    sendQuizz.catch(sendQuizzError);
+
+    if(editingQuizz === false){
+        const sendQuizz = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes", createdQuizz);
+        sendQuizz.then(sendQuizzSucess);
+        sendQuizz.catch(sendQuizzError);
+
+    }else{
+        const config = {data: createdQuizz, headers: {'Secret-Key': editKey}};
+        const editQuizz = axios.put(`https://mock-api.bootcamp.respondeai.com.br/api/v2/buzzquizz/quizzes/${editId}`, config);
+        editQuizz.then(editQuizzSucess);
+        editQuizz.catch(editQuizzError);
+    }
+}
+
+function editQuizzSucess(letter){
+    toggleHidden(loadingScreen);
+    alert("Seu quizz foi editado com sucesso!");
+    const id = letter.data.id;
+    const accessQuizz = document.querySelector('.access');
+    accessQuizz.setAttribute('onclick', `RequireQuizz(${id})`); 
+}
+
+function editQuizz(id, key){
+    editId = id;
+    editKey = key;
+    editingQuizz = true;
+    createQuizzStart();
 }
 
 function sendQuizzSucess(letter){ //coletando id do post para o localStorage
@@ -393,6 +419,10 @@ function sendQuizzError(){
     alert("Houve um problema na criação do seu quizz :(");
 }
 
+function editQuizzError(){
+    alert("Houve um problema na edição do seu quizz :(");
+}
+
 
 // Quizz Loading
 RequireQuizzes();
@@ -419,7 +449,7 @@ function LoadQuizzes(post) {
         ulUserQuizzes.innerHTML += `
         <li class="quizz quizz${element.id}">
             <div class="user-quizz-options">
-                <ion-icon name="create-outline"></ion-icon>
+                <ion-icon onclick="editQuizz(${element.id}, ${element.key})" name="create-outline"></ion-icon>
                 <ion-icon onclick="deleteQuizz(${element.id})" name="trash-outline"></ion-icon>
             </div>
             <img src="${element.image}" alt="">
