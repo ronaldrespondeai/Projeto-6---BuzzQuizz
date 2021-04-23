@@ -98,7 +98,7 @@ function createQuestionsScreen(numberQuestions){
         <div class="forms-container">
             <div class="collapsible-menu" onclick="collapsibleMenu(this)">
                 <strong>Pergunta ${i}</strong>
-                <ion-icon class="create-quizz-icon" name="create-outline"></ion-icon>
+                <ion-icon name="create-outline"></ion-icon>
             </div>
             <div class="collapsible-content hidden">
                 <input class="create-quizz-question" required type="text" placeholder="Texto da pergunta" minlength="20">
