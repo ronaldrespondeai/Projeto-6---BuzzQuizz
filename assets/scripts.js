@@ -256,11 +256,12 @@ function questionsValidation(title, color, correctAnswer, correctImg, answersArr
 
 function createLevelsScreen(numberLevels){
     levelsContainer.innerHTML = "";
-    for(let i = 1; i<numberLevels+1; i++){
+
+    for(let i = 0; i<numberLevels; i++){
         levelsContainer.innerHTML += `
     <div class="forms-container">
         <div class="collapsible-menu" onclick="collapsibleMenu(this)">   
-            <strong>Nível ${i}</strong>
+            <strong>Nível ${i+1}</strong>
             <ion-icon name="create-outline"></ion-icon>
         </div>
         <div class="collapsible-content hidden">
@@ -276,6 +277,25 @@ function createLevelsScreen(numberLevels){
     </div>
         `
     }
+    if(editingQuizz === true){
+        setTimeout(preencher,1000);
+    }
+}
+
+function preencher(){
+    const titleLevel = document.querySelectorAll(".create-quizz-level-title");
+    const minValueLevel = document.querySelectorAll(".create-quizz-level-min");
+    const imgLevel = document.querySelectorAll(".create-quizz-level-img");
+    const descriptionLevel = document.querySelectorAll(".create-quizz-level-description");
+
+    let i = 0;
+    while(i<2){
+        titleLevel[i].value += editingElement.levels[i].title;
+        descriptionLevel[i].value += editingElement.levels[i].text;
+        minValueLevel[i].value += editingElement.levels[i].minValue;
+        imgLevel[i].value += editingElement.levels[i].image;
+        i++;
+    } // for não funcionava de jeito nenhum?
 }
 
 quizzLevelsScreen.addEventListener('keydown', (e) => {if(e.key === 'Enter'){createLevels()}});
