@@ -170,7 +170,7 @@ function createQuestionsScreen(numberQuestions){
             quizzBackground.value = editingElement.questions[i].color;
 
             const answers = editingElement.questions[i].answers;
-            console.log(answers);
+
             for (let n=0; n<answers.length; n++) {
                 if (answers[n].isCorrectAnswer === true) {
                     quizzAnswer.value = editingElement.questions[i].answers[n].text;
@@ -178,9 +178,7 @@ function createQuestionsScreen(numberQuestions){
                     answers.splice(n, 1);
                     n = answers.length;
                 }
-            }
-            console.log(answers);
-            
+            }            
 
             for(let j=0; j<answers.length; j++) {
                 wrongAnswer[j].value = answers[j].text;
