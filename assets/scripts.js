@@ -63,11 +63,11 @@ function createQuizzStart(){
     allInputs.forEach(element => element.value = "");
 
     if(editingQuizz === true){
-        title.value += editingElement.title;
-        imgUrl.value += editingElement.image;
+        title.value = editingElement.title;
+        imgUrl.value = editingElement.image;
         const numberQuestionsInput = document.querySelector(".create-quizz-questions");
-        numberQuestionsInput.value += editingElement.questions.length;
-        numberLevels.value += editingElement.levels.length;
+        numberQuestionsInput.value = editingElement.questions.length;
+        numberLevels.value = editingElement.levels.length;
     }
 
     toggleHidden(homePage);
@@ -124,11 +124,11 @@ function validCreateQuizz(numberQuestions){
 
 function createQuestionsScreen(numberQuestions){
     questionsContainer.innerHTML = "";
-    for(let i = 1; i<numberQuestions+1; i++){
+    for(let i = 0; i<numberQuestions; i++){
         questionsContainer.innerHTML += `
-        <div class="forms-container">
+        <div class="forms-container container${i}">
             <div class="collapsible-menu" onclick="collapsibleMenu(this)">
-                <strong>Pergunta ${i}</strong>
+                <strong>Pergunta ${i+1}</strong>
                 <ion-icon name="create-outline"></ion-icon>
             </div>
             <div class="collapsible-content hidden">
@@ -150,31 +150,33 @@ function createQuestionsScreen(numberQuestions){
                 <input class="create-quizz-wronganswerimg" type="url" placeholder="URL da imagem 3">
             </div>
         </div>
-        `
-    }
+        `;
+    };
+
 
     if(editingQuizz === true){
-        const questionName = document.querySelectorAll(".create-quizz-question");
-        const questionBackground = document.querySelectorAll(".create-quizz-background");
-        const questionAnswer = document.querySelectorAll(".create-quizz-answer");
-        const questionAnswerImg = document.querySelectorAll(".create-quizz-answerimg");
-        
-        let i = 0;
-        while(i<editingElement.questions.length){
-            questionName[i].value += editingElement.questions[i].title;
-            questionBackground[i].value += editingElement.questions[i].color;
+        for (let i=0; i<numberQuestions; i++) {
+            const container = document.querySelector(`.container${i}`);
 
-            for(let j = 0; j<editingElement.questions[i].answers.length; j++){
-                questionAnswer[i].value += editingElement.questions[i].answers[j].text;
-                questionAnswerImg[i].value += editingElement.questions[i].answers[j].image;
+            const quizzQuestion = container.querySelector('.create-quizz-question');
+            const quizzBackground = container.querySelector('.create-quizz-background');
+            const quizzAnswer = container.querySelector('.create-quizz-answer');
+            const quizzAnswerImg = container.querySelector('.create-quizz-answerimg');
+
+            const wrongAnswer = container.querySelectorAll('.create-quizz-wronganswer');
+            const wrongAnswerImg = container.querySelectorAll('.create-quizz-wronganswerimg');
+
+            quizzQuestion.value = editingElement.questions[i].title;
+            quizzBackground.value = editingElement.questions[i].color;
+            quizzAnswer.value = editingElement.questions[i].answers[0].text;
+            quizzAnswerImg.value = editingElement.questions[i].answers[0].image;
+
+            for(let j=0; j<editingElement.questions[i].answers.length - 1; j++) {
+                wrongAnswer[j].value = editingElement.questions[i].answers[j+1].text;
+                wrongAnswerImg[j].value = editingElement.questions[i].answers[j+1].image;
             }
-            
-            i++;
         }
-
-
     }
-
 }
 
 function collapsibleMenu(element){
@@ -434,7 +436,7 @@ function editQuizz(id){
 
 function getEditingElement(letter){
     editingElement = letter.data;
-    console.log(editingElement);
+    //console.log(editingElement);
     createQuizzStart();
 }
 
@@ -478,7 +480,7 @@ function sendQuizzError(){
 }
 
 function editQuizzError(letter){
-    console.log(letter)
+    //console.log(letter)
     alert("Houve um problema na edição do seu quizz :(");
 }
 
