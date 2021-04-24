@@ -168,12 +168,23 @@ function createQuestionsScreen(numberQuestions){
 
             quizzQuestion.value = editingElement.questions[i].title;
             quizzBackground.value = editingElement.questions[i].color;
-            quizzAnswer.value = editingElement.questions[i].answers[0].text;
-            quizzAnswerImg.value = editingElement.questions[i].answers[0].image;
 
-            for(let j=0; j<editingElement.questions[i].answers.length - 1; j++) {
-                wrongAnswer[j].value = editingElement.questions[i].answers[j+1].text;
-                wrongAnswerImg[j].value = editingElement.questions[i].answers[j+1].image;
+            const answers = editingElement.questions[i].answers;
+            console.log(answers);
+            for (let n=0; n<answers.length; n++) {
+                if (answers[n].isCorrectAnswer === true) {
+                    quizzAnswer.value = editingElement.questions[i].answers[n].text;
+                    quizzAnswerImg.value = editingElement.questions[i].answers[n].image;
+                    answers.splice(n, 1);
+                    n = answers.length;
+                }
+            }
+            console.log(answers);
+            
+
+            for(let j=0; j<answers.length; j++) {
+                wrongAnswer[j].value = answers[j].text;
+                wrongAnswerImg[j].value = answers[j].image;
             }
         }
     }
